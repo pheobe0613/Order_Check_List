@@ -1,0 +1,519 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head><!-- frame-runtime --><script>window.__FRAME_PREAMBLE={"v":1,"cred":"cookie","capabilities":{"artifact":"artifact.Cc31PZsR.js","assets":"assets.DG69nuOE.js","comments":"comments.D_4YQjln.js","db":"db.CCPy_cYa.js","desktop":"desktop.CXuIZ5Ts.js","dictation":"dictation.C9bJoIZV.js","downloads":"downloads.WsdFaoeg.js","embed":"embed.DL8CVLpf.js","endpoints":"endpoints.Cgd32w2P.js","files":"files.BWjhUR2a.js","mcp":"mcp.RT0IhfK0.js","network":"network.B5UA9Su4.js","paste":"paste.BXT-6GsY.js","permissions":"permissions.YN66judO.js","reads":"reads.Ch7Jwxh7.js","room":"room.DcZfm17Q.js","sample":"sample.DwGzO02I.js","self":"artifact.Cc31PZsR.js","tts":"tts.DT7xqCtz.js","user":"user.DWCNmu2k.js"},"transforms":"_transforms.DAbSLOS6.js","comments":"_comments.iKvwb-kg.js","translate":"_translate.DnEmLa3t.js"}                                                                                                                                                                                                                                                                                               </script><script>(function(){"use strict";function ir(t){return t==="cookie"||t==="query"?t:void 0}function lr(t){return typeof t=="number"&&Number.isSafeInteger(t)&&t>0?t:void 0}var Jn=3e5;function cr(t,e){try{const r=t("navigation")[0],n=[r.responseStart,r.redirectEnd-r.redirectStart,r.domContentLoadedEventStart,e(),r.connectEnd-r.domainLookupStart,r.responseStart-r.requestStart];r.requestStart>0||(n.length=4);for(let a=0;a<n.length;a++)if(n[a]>=0&&n[a]<=3e5)n[a]=n[a]|0;else{if(a<4)return;n.length=4}return n}catch{return}}var ur=["light","dark","system"],fr=/^[A-Za-z0-9_-]{1,64}$/,St=/^[a-zA-Z_:][a-zA-Z0-9_:.-]{0,127}$/,dr=new Set(["class","hidden","value","checked","style","title","alt","placeholder","lang","dir","role","tabindex","disabled","readonly","contenteditable","open","colspan","rowspan"]);function hr(t){const e=t.toLowerCase();return e.startsWith("data-")||e.startsWith("aria-")||dr.has(e)}var Zn="http://www.w3.org/1999/xhtml",pr="http://www.w3.org/2000/svg",mr=new Set(["script","style","iframe","noscript","noframes","noembed","xmp","plaintext","template","title","textarea","object","embed"]),vr=new Set(["script","style"]);function _r(t){const e=t.localName.toLowerCase();return t.namespaceURI==="http://www.w3.org/1999/xhtml"?!mr.has(e):t.namespaceURI===pr?!vr.has(e):!1}function et(t,e){return t===e||(t===160||t===32)&&(e===160||e===32)}function yr(t,e){const r=t.length,n=e.length;let a=0;for(;a<r&&a<n&&et(t.charCodeAt(a),e.charCodeAt(a));)a++;let s=0;for(;s<r-a&&s<n-a&&et(t.charCodeAt(r-1-s),e.charCodeAt(n-1-s));)s++;return{p:a,s}}function gr(t,e){const r=t.firstChild;if(t.childNodes.length!==1||r===null||r.nodeType!==Node.TEXT_NODE){t.textContent=e;return}const n=r.data,a=n.length,s=e.length,{p:l,s:u}=yr(n,e);l===a&&u===0&&a===s||r.replaceData(l,a-l-u,e.slice(l,s-u));const S=r.data,E=t.ownerDocument.getSelection?.()??null,g=E!==null&&E.rangeCount>0&&(E.anchorNode===r||E.focusNode===r)?{anchor:E.anchorNode,anchorOffset:E.anchorOffset,focus:E.focusNode,focusOffset:E.focusOffset}:null;let h=-1,k=-1;for(let b=0;b<S.length&&b<e.length;b++){const T=S.charCodeAt(b),C=e.charCodeAt(b);T!==C&&et(T,C)&&(h<0&&(h=b),k=b)}const M=h>=0;if(M&&r.replaceData(h,k-h+1,e.slice(h,k+1)),M&&g!==null&&g.anchor!==null&&g.focus!==null)try{E.setBaseAndExtent(g.anchor,g.anchorOffset,g.focus,g.focusOffset)}catch{}}var wr=new Set(["html","head","body","frameset"]);function br(t){return t.namespaceURI==="http://www.w3.org/1999/xhtml"&&wr.has(t.localName)}function Er(t){if(t===null||typeof t!="object")return!1;const e=t;if(typeof e.target!="string"||!fr.test(e.target)||e.text!==void 0&&typeof e.text!="string")return!1;if(e.attrsSet!==void 0){if(e.attrsSet===null||typeof e.attrsSet!="object")return!1;for(const[r,n]of Object.entries(e.attrsSet))if(!St.test(r)||typeof n!="string")return!1}if(e.attrsRemoved!==void 0){if(!Array.isArray(e.attrsRemoved))return!1;for(const r of e.attrsRemoved)if(typeof r!="string"||!St.test(r))return!1}return!0}function Sr(t,e){if(t===null||typeof t!="object")return!1;const{seq:r,elements:n}=t;if(typeof r!="number"||!Number.isSafeInteger(r)||!Array.isArray(n)||n.length===0||n.length>64)return!1;for(let a=0;a<n.length;a++)if(!e(n[a]))return!1;return!0}function kr(t){return t===null||typeof t!="object"?!1:Sr(t.__frame_patch,Er)}function Rr(t){if(t===null||typeof t!="object")return!1;const e=t.__frame_init;return e!==null&&typeof e=="object"}function Ar(t){return t!==null&&typeof t=="object"&&t.__frame_size_poke===!0}function Tr(t){if(t===null||typeof t!="object")return!1;const e=t.__frame_host_visible;return e!==null&&typeof e=="object"&&typeof e.visible=="boolean"}function Or(t){if(t===null||typeof t!="object")return!1;const e=t.__frame_theme;if(e===null||typeof e!="object")return!1;const r=e.theme;return typeof r=="string"&&ur.includes(r)}var Lr=["ok","empty","snapshot_error","snapshot_timeout","unclonable","oversize","unavailable","restore_error","withheld"],Mr=["TypeError","RangeError","ReferenceError","SyntaxError","DataCloneError","QuotaExceededError","AbortError","TimeoutError","SecurityError","Error","other"];function Pr(t){return typeof t=="string"&&Mr.includes(t)?t:"other"}var Nr=Object.freeze({until:null,now:!1}),Cr="__claude_hot",Fr="__claude_hot_in",Hr=/^__claude_hot(?:_in)?(?::|$)/,kt=/^[0-9a-z]{1,32}$/,tt=t=>t===void 0?Cr:"__claude_hot:"+t,Oe=t=>t===void 0?Fr:"__claude_hot_in:"+t;function Ir(t,e){const r=[];for(let n=0;n<t.length;n++){const a=t.key(n);a!==null&&a!==e&&Hr.test(a)&&r.push(a)}for(const n of r)t.removeItem(n)}function jr(t){let e=null;try{e=x(JSON.parse(t)?.hot)}catch{return null}return e===null||typeof e.k!="string"||!kt.test(e.k)?null:pe(e.g)?{k:e.k,g:e.g}:{k:e.k}}var Qn=262144,Br=5e3,Rt=/^[a-z0-9._:-]{1,64}$/,Dr=["none","hot-restart","hard-reload"],qr=["asset","doc","added","removed"],Ur=1500,xr=/^[0-9a-f]{64}$/;function x(t){return t!==null&&typeof t=="object"?t:null}function pe(t){return typeof t=="number"&&Number.isInteger(t)&&t>=0&&t<2**31}function At(t){return t===void 0||typeof t=="number"&&Number.isFinite(t)}function Kr(t){return t===void 0||typeof t=="string"&&Rt.test(t)}function Tt(t){const e=x(t);return e!==null&&(e.until===null||typeof e.until=="number"&&Number.isFinite(e.until))&&typeof e.now=="boolean"}function rt(t){const e=x(t);return e!==null&&typeof e.ver=="string"&&e.ver.length<=128&&At(e.seq)&&typeof e.handoff=="string"&&Lr.includes(e.handoff)&&Kr(e.note)}function Ot(t){const e=x(t);return e!==null&&pe(e.gen)&&(e.phase==="final"||e.phase==="pending")&&(e.from===null||rt(e.from))}function $r(t){const e=x(t);return e!==null&&e.kv===1&&pe(e.gen)&&rt(e.from)&&Object.hasOwn(e,"data")}function zr(t){const e=x(t);return e!==null&&e.__frame_hot_snapshot===!0&&pe(e.gen)&&typeof e.timeoutMs=="number"&&e.timeoutMs>=0&&e.timeoutMs<=6e4&&(e.handoff===void 0||typeof e.handoff=="boolean")&&(e.deadline===void 0||Tt(e.deadline))&&At(e.seq)&&(e.note===void 0||typeof e.note=="string")&&(e.key===void 0||typeof e.key=="string")}function Wr(t){const e=x(t);return e!==null&&e.__frame_hot_start===!0&&pe(e.gen)&&rt(e.from)}function Gr(t){return typeof t=="string"&&t.length>=1&&t.length<=128}function Lt(t){return x(t)!==null&&!Array.isArray(t)}function Vr(t){const e=x(t);return e!==null&&e.__frame_cap_grant===!0&&typeof e.cap=="string"&&Gr(e.ver)&&(e.grant===void 0||Lt(e.grant))&&(e.budgets===void 0||Lt(e.budgets)&&Object.values(e.budgets).every(Number.isFinite))&&(e.brokerGen===void 0||pe(e.brokerGen))}function Yr(t){const e=x(t);return e!==null&&e.__frame_cap_rewired===!0&&(e.caps===void 0||Array.isArray(e.caps)&&e.caps.every(r=>typeof r=="string"))&&(e.brokerGen===void 0||pe(e.brokerGen))}function Ue(t){const e=x(t);return e!==null&&typeof e.ver=="string"&&e.ver.length<=128&&Number.isFinite(e.seq)}function Mt(t){if(t==null||typeof t=="string")return!0;const e=x(t);return e!==null&&typeof e.doc=="string"&&typeof e.profile=="string"}function Xr(t){const e=x(t);return e!==null&&typeof e.path=="string"&&qr.includes(e.kind)&&Mt(e.from)&&Mt(e.to)}function Jr(t){return t===null?null:Object.freeze(t.filter(Xr))}function Zr(t){const e=x(t);return e!==null&&e.__frame_hot_update===!0&&Number.isFinite(e.id)&&Ue(e.from)&&Ue(e.to)&&(e.changed===null||Array.isArray(e.changed))&&Dr.includes(e.required)&&Tt(e.deadline)&&typeof e.verdictTimeoutMs=="number"&&e.verdictTimeoutMs>=0&&e.verdictTimeoutMs<=6e4&&(e.preflight===void 0||typeof e.preflight=="string"&&xr.test(e.preflight))}function Qr(t){const e=x(t);return e!==null&&e.__frame_hot_readdress===!0&&Ue(e.from)&&Ue(e.to)}var ye=/^[\w.-]+\.js$/;function en(t,e,r){return r?"inert":typeof e=="string"&&ye.test(e)?t?[e]:"inert":t?"inert":"framed"}var Pt=Object.freeze({[Symbol("claude.hot.restart")]:!0});function Nt(t,e){let r;try{r=t??sessionStorage}catch{return null}const n=tt(e?.k),a=Oe(e?.k);let s=null;try{s=r.getItem(n)}catch{}try{r.removeItem(n)}catch{}try{Ir(r,a)}catch{}let l=null;if(s!==null&&!(e!==null&&e.g===void 0))try{const u=JSON.parse(s);$r(u)&&(e===null||u.gen===e.g)&&(l=u)}catch{}if(l===null)try{r.removeItem(a)}catch{}return l}function Ct(){const t=/^\/_f\/([^/]{1,128})\//.exec(location.pathname);return t?t[1]:""}var tn=/^[^/\\?#]{1,128}$/,nt=t=>tn.test(t)&&t!=="."&&t!=="..";function Ft(t,e,r){const n=new URL(t),a="/_f/"+e+"/";if(!e||!n.pathname.startsWith(a)||!nt(r))return null;const s=n.search.slice(1).split("&").filter(l=>!/^__frame_t(?:=|$)/.test(l)).join("&");return n.origin+"/_f/"+r+"/"+n.pathname.slice(a.length)+(s?"?"+s:"")+n.hash}var xe="{}";function Le(t){if(!t)return null;const e={ver:t.ver,handoff:t.handoff};return t.seq!==void 0&&(e.seq=t.seq),t.note!==void 0&&(e.note=t.note),e}function Ht(t,e){return t!==null&&t.note===void 0&&e?.note!==void 0?{...t,note:e.note}:t}function It(t){const e=t?.k;return e!==null&&typeof e=="object"?e:void 0}function rn(t,e,r,n=null){const a=setTimeout,s=clearTimeout,l=queueMicrotask,u=performance.now.bind(performance),S=new TextEncoder;let E=null,g=null;try{E=history,g=E.replaceState.bind(E)}catch{}const h=(...o)=>{try{console.warn(...o)}catch{}};let k=Ct(),M=null;try{M=sessionStorage}catch{}const b={storage:M,fetch:typeof fetch=="function"?fetch.bind(globalThis):null,entry:location.origin+location.pathname+location.search,ver:k,priors:[],key:n?.k};let T=n?.k;const C=typeof requestAnimationFrame=="function"?requestAnimationFrame:o=>a(()=>o(u()),16);let p=e?.data??{},K=Le(e?.from),W=e?.gen??0,J=e!==null,$=!1,G=!1,z=null,R=!1;const j=new AbortController;let V=null,H=null,ne=null,me=!1,ie=()=>{};const Y=new Promise(o=>{ie=o});let be=!1,Fe=!1,c=!1,m,v=null,I=!1,D=!1,B=!1,q=!1,Z=!1,le=!1;const Ve=o=>{for(const f of[tt(o),Oe(o)])try{M?.removeItem(f)}catch{}},X=(o,f)=>{try{f!==null&&r.post(o,f)}catch{}},He=()=>Z||=B&&(H===null||q),oe=()=>{const o={__frame_hot:!0,ready:H!==null,accept:ne!==null,demand:!0};le=!Z,le&&(o.booting=!0),be&&(o.readData=!0),c&&(o.threw=!0),v?.assess&&(o.preflight=!0),X(o,z)};let Ie=!1,ce=!1,ve=!1,je=!1;const Ye=()=>{Ie||!R||ve||(Ie=!0,X({__frame_reveal_hold:!0},"*"))},_e=()=>new Promise(o=>{let f,d=0;const w=P=>{if(f===void 0)f=P;else if(P!==f||++d>=8){o();return}try{C(w)}catch{o()}};try{C(w)}catch{o()}}),Be=()=>{ve=!0,X({__frame_reveal_ready:!0},"*")},Ee=o=>{ce||(ce=!0,o.then(f=>{if(f===!1)return;let d=null;try{d=v?.settle?.()??null}catch{}return(d===null?_e():new Promise(w=>{a(w,50),Promise.resolve(d).then(w,w)}).then(_e)).then(Be)}))},_t=()=>{if(je||!ve)return;je=!0;const o=()=>{try{v?.afterReveal?.()}catch{}};o(),_e().then(()=>{o(),Be()})},Se=(o=!1)=>{if(me||H===null||!J||!G)return;me=!0;const f=H,d=p;l(()=>{let w;try{w=f(d)}catch(N){throw ie(!1),N}let P=!1;try{P=typeof w?.then=="function"}catch{}if(!P){ie(!0);return}Promise.resolve(w).then(()=>ie(!0),N=>{ie(!1),l(()=>{throw N})})}),Ee(o?Y:r.dcl.then(()=>Y))},ae=o=>typeof o=="string"&&Rt.test(o)?o:void 0,ke=o=>{const f={__frame_hot_restart:!0},d=ae(o?.note);d!==void 0&&(f.note=d),o?.required==="hard-reload"&&(f.required="hard-reload"),X(f,z)},De=Object.freeze({get data(){return G||(Fe=!0),!J&&!be&&(be=!0,G&&oe()),p},get from(){return K},get gen(){return W},signal:j.signal,snapshot(o){typeof o=="function"&&(V=o)},ready(o){typeof o!="function"||H!==null||(H=o,Ye(),oe(),$&&X({__frame_hot_ready:!0,gen:W},z),Se())},accept(o){typeof o=="function"&&(ne=o,oe())},restart(o){const f={note:o?.note,required:o?.required};if(G){ke(f);return}const d=m;m={note:ae(d?.note)??f.note,required:d?.required==="hard-reload"||f.required==="hard-reload"?"hard-reload":void 0}}}),Xe=()=>{if(!I||D||v===null)return;D=!0;const o=v;r.dcl.then(()=>{try{ve||o.afterStart(It(e),!1)}catch{}})},qe=o=>{e!==null&&Fe&&(be=!0),p={},K=null,W=0;try{M?.removeItem(Oe(n?.k))}catch{}e!==null&&!o&&Ee(r.dcl.then(()=>H!==null?Y:void 0))},i=()=>{I=!0,Ee(r.dcl.then(()=>H!==null?Y:void 0)),Xe()};try{addEventListener("error",()=>{c||H!==null||(c=!0,oe())})}catch{}const _=()=>{a(()=>{!Z&&He()&&le&&oe()},0)};try{B=document.readyState==="complete",B||addEventListener("load",()=>{B=!0,_()},{once:!0})}catch{B=!0}He(),Y.then(()=>{q=!0,_()});let y=-1,O,te,U=!0,se=!1,yt,Je=null;const gt=o=>{const f=Je===null;Je=U&&o[0]!=="withheld"?o:["withheld",o[1],xe];let d=o[0];if(U&&d!=="withheld"){const P={ver:k,handoff:d};O!==void 0&&(P.seq=O),te!==void 0&&(P.note=te);try{if(M===null)throw new Error("no storage");M.setItem(tt(T),'{"kv":1,"gen":'+y+',"from":'+JSON.stringify(P)+(yt!==void 0?',"k":'+JSON.stringify(yt):"")+',"data":'+(d==="ok"?o[2]:xe)+"}")}catch{d="unavailable"}}else{d="withheld",Ve(T);try{v?.release?.()}catch{}}const w={__frame_hot_snapshotted:!0,gen:y,handoff:d,bytes:o[1]};o[3]!==void 0&&(w.errName=o[3]),X(w,z),f&&(d==="snapshot_error"||d==="unclonable"||d==="oversize")&&h("claude.hot: snapshot",d,o[3])},Re=o=>{try{return Pr(o?.name)}catch{return"other"}},Ae=(o,f,d=0)=>gt(f===void 0?[o,d,xe]:[o,d,xe,Re(f)]),xn=o=>{if(o.gen<=y)return;const f=y>=0;if(y=o.gen,O=o.seq,te=ae(o.note),typeof o.key=="string"&&kt.test(o.key)&&o.key!==T&&(Ve(T),T=o.key),U&&=o.handoff!==!1,f){Je!==null?gt(Je):se&&X({__frame_hot_held:!0,gen:y},z);return}j.abort();const d=Object.freeze({handoff:U,timeoutMs:o.timeoutMs,deadline:o.deadline??Nr}),w=V,P=()=>{if(U)try{yt=v?.capture()}catch{}if(w===null){Ae("empty");return}let A=!1;const Q=a(()=>{A||(A=!0,Ae("snapshot_timeout"))},Math.max(0,d.timeoutMs));Promise.resolve().then(()=>w(d)).then(Te=>{if(A)return;A=!0,s(Q);let ue;try{ue=JSON.stringify(Te)}catch(wt){Ae("unclonable",wt);return}if(typeof ue!="string"){Ae("unclonable");return}let fe=ue.length;try{fe=S.encode(ue).length}catch{}if(fe>262144){Ae("oversize",void 0,fe);return}gt(["ok",fe,ue])},Te=>{A||(A=!0,s(Q),Ae("snapshot_error",Te))})};let N=null;try{N=v?.holdForIme()??null}catch{}if(N===null)P();else{se=!0,X({__frame_hot_held:!0,gen:y},z);const A=()=>{se=!1,P()};N.then(A,A)}},Kn=o=>{if(!$||J||H===null||o.gen!==W)return;let f=null;try{f=Nt(M,n&&{k:n.k,g:o.gen})}catch{}if(f!==null&&f.gen!==o.gen){f=null;try{M?.removeItem(Oe(n?.k))}catch{}}p=f?.data??{},K=Ht(Le(f?.from??o.from),Le(o.from)),f!==null&&(W=f.gen),J=!0,$=!1;const d=It(f);Y.then(w=>{try{w&&v?.afterStart(d,!0)}catch{}}),Se(!0)},nr=o=>{const f=k,d=b.entry;let w="",P,N=null;try{if(w=location.href,P=E.state,N=Ft(w,f,o),N!==null)if(g(P,"",N),location.pathname.startsWith("/_f/"+o+"/"))N=location.href;else return{failed:"navigate event canceled"}}catch(A){return{failed:Re(A)}}k=b.ver=o,b.priors.push(f)>8&&b.priors.splice(1,1);try{b.entry=Ft(d,f,o)??d}catch{}return[N,f,d,w,P]},$n=({from:o,to:f})=>{let d,w;if(!nt(f.ver))d="adopt_failed",w="not a version path segment";else if(f.ver===k)d="adopted";else if(!k||o.ver!==k)d="stale";else{const N=nr(f.ver);"failed"in N?(d="adopt_failed",w=N.failed):d=N[0]===null?"adopt_skipped":"adopted"}w!==void 0&&h(`claude.hot: could not move this page's URL to its new version folder /_f/${f.ver}/ (${w})`);const P={__frame_hot_readdressed:!0,to:f.ver,at:k,outcome:d};X(P,z)};let Ze=0;const zn=o=>{const f=ne;if(f===null||o.id<=Ze)return;Ze=o.id;const d=v?.assess;if(o.preflight===void 0||d===void 0){or(o,f);return}let w=!1;const P=Q=>{w||(w=!0,s(A),o.id===Ze&&or(o,f,Q))},N=()=>P(d.timeout(o)),A=a(N,Ur+100);d.run(o,window).then(P,N)},or=(o,f,d)=>{let w,P=!1,N=!1,A,Q,Te=null;const ue=F=>{if(N)return!1;if(A!==void 0&&A!==F)return h(`claude.hot: u.${F}() ignored - u.${A}() was called first`),!1;const de=A===void 0;return A=F,de},fe=F=>{A="restart",h(`claude.hot: ${F} - restarting`)},wt=()=>{if(!ue("adopt")||o.id!==Ze)return;const F=o.to.ver;if(Qe.required!=="none"){fe(`u.adopt() needs required 'none', it is '${Qe.required}'`);return}if(!nt(F)){fe("u.adopt() cannot address this version");return}if(!k||F===k)return;const de=nr(F);if("failed"in de){Q="adopt_failed",fe(`adopt_failed ${de.failed}; URL not changed`);return}const[re,Et,Vn,sr,Yn]=de;re===null?(Q="adopt_skipped",h(`claude.hot: adopt_skipped - page already left /_f/${Et}/; URL not changed, update still applied`)):Q="adopted",Te=()=>{if(k===F){if(re!==null)try{if(location.href!==re)h("claude.hot: adopt_revert_skipped - update not applied; URL left where the page navigated");else{if(g(Yn,"",sr),location.href!==sr){h("claude.hot: adopt_revert_failed navigate event canceled - URL still at the new version");return}Q="adopt_reverted",h("claude.hot: adopt_reverted - adopt() was called but the handler threw; URL restored")}}catch(Xn){h(`claude.hot: adopt_revert_failed ${Re(Xn)} - URL still at the new version`);return}k=b.ver=Et,b.entry=Vn,b.priors[b.priors.length-1]===Et&&b.priors.pop(),re===null&&(Q=void 0)}}},Qe=Object.freeze({from:{ver:o.from.ver,seq:o.from.seq},to:{ver:o.to.ver,seq:o.to.seq},changed:Jr(o.changed),required:o.required,deadline:o.deadline,adopt:wt,defer(){return ue("defer")&&Qe.deadline.now&&fe("u.defer() past the deadline"),Pt},restart(F){return ue("restart"),A==="restart"&&!N&&(w??=ae(F?.note),P||=F?.required==="hard-reload"),Pt},...d?.update}),Wn=(F,de)=>{N=!0,F==="threw"?(Te?.(),w??=Re(de).toLowerCase()):A===void 0&&h(F==="timeout"?"claude.hot: accept handler did not answer in time - restarting":"claude.hot: accept handler settled without defer/restart/adopt - restarting");const re={__frame_hot_verdict:!0,id:o.id};re.verdict=F==="threw"||A===void 0||A==="restart"?"restart":A==="adopt"?"applied":"deferred",re.verdict==="restart"&&(P&&(re.required="hard-reload"),w!==void 0&&(re.note=w)),Q!==void 0&&(re.verdict==="applied"||Q!=="adopted")&&(re.adopt=Q),X(Object.assign(re,d?.verdict),z)};let ar=!1;const bt=(F,de)=>ar?!1:(ar=!0,s(Gn),Wn(F,de),!0),Gn=a(()=>bt("timeout"),o.verdictTimeoutMs);Promise.resolve().then(()=>f(Qe)).then(()=>bt("settled"),F=>{!bt("threw",F)&&A==="adopt"&&ke({note:Re(F).toLowerCase()}),h("claude.hot: accept",Re(F))})};try{t.hot===void 0&&Object.defineProperty(t,"hot",{value:De,writable:!1,configurable:!1,enumerable:!1})}catch{}return{hot:De,boot:b,afterConnect(){R=!0,(e!==null||H!==null)&&Ye()},onInit(o,f){z=f,G=!0;const d=Ot(o)?o:null;d?.phase==="final"&&e!==null&&e.gen===d.gen?(J=!0,K=Ht(K,Le(d.from)),i()):($=d?.phase==="pending",qe($),J=!$,W=d?.gen??0,K=Le(d?.from)),oe(),le&&a(()=>{Z||(Z=!0,oe())},Br),$&&H!==null&&X({__frame_hot_ready:!0,gen:W},f),m!==void 0&&(ke(m),m=void 0),Se()},onNoInit(){G=!0,qe(!1),J=!0,Se()},onShell(o){return o?.__frame_revealed===!0?(_t(),!1):zr(o)?(xn(o),!0):Wr(o)?(Kn(o),!0):Zr(o)?(zn(o),!0):Qr(o)?($n(o),!0):!1},attachExtras(o){v=o,Xe(),o.assess&&oe()},inSlot:()=>Oe(T)}}var nn=256;function ot(t,e,r){for(const n of t)r(n)&&t.delete(n);t.size>=nn&&!t.has(e)&&t.delete(t.values().next().value),t.add(e)}function Me(t,e,r,n){try{const a=t[e];if(typeof a!="function")return;t[e]=function(...s){if(n){let u;try{u=n(this)}catch{}if(u!==void 0)return u}const l=a.apply(this,s);try{r?.(this)}catch{}return l}}catch{}}var on=()=>{},at;function an(){if(at)return at;const t={media:new Set,contexts:new Set,wakeLocks:new Set,gate:null,refuse:null,onStart:null,onStop:null};at=t;const e=l=>t.gate?.(l),r=l=>{t.onStop?.(l)},n=window.HTMLMediaElement?.prototype;n&&(Me(n,"play",l=>{ot(t.media,l,u=>u.paused),t.onStart?.(l)},e),Me(n,"pause",r));const a=window.AudioContext,s=window.AudioNode?.prototype;a&&s&&(Me(s,"connect",l=>{const u=l.context;u instanceof a&&(ot(t.contexts,u,S=>S.state==="closed"),t.onStart?.(u))}),Me(a.prototype,"resume",void 0,e),Me(a.prototype,"suspend",r));try{const l=window.WakeLock?.prototype,u=l?.request;l&&typeof u=="function"&&(l.request=function(...S){if(t.refuse)return t.refuse();const E=u.apply(this,S);return Promise.resolve(E).then(g=>{ot(t.wakeLocks,g,h=>h.released),t.onStart?.(g)},on),E})}catch{}return t}function sn(t){let e=window;for(let r=0;e.parent&&e.parent!==e&&r<8;r++)if(e=e.parent,t(e))return!0;return!1}function ln(){let t=null;const e=()=>t??parent,r=n=>t?n===t:sn(a=>a===n);return{post(n,a){if(t){e().postMessage(n,a);return}let s=parent;for(let l=0;l<8&&(s.postMessage(n,a),!(!s.parent||s.parent===s));l++)s=s.parent},on(n){const a=s=>{const l=s.source;r(l)&&n(s.data,s.origin,s.isTrusted,()=>{t??=l})};return addEventListener("message",a),()=>removeEventListener("message",a)},port:n=>({post(a,s){if(s?.activation){e().postMessage(a,{targetOrigin:n,includeUserActivation:!0});return}if(s?.transfer){e().postMessage(a,n,s.transfer);return}e().postMessage(a,n)},on(a,s){const l=u=>{r(u.source)&&u.origin===n&&a(u.data,u)};return addEventListener("message",l,s),()=>removeEventListener("message",l,s)}})}}function cn(){const t={post:()=>{},on:()=>()=>{}};return{...t,port:()=>t}}var un=500,fn=2e4,dn="data-token-reads",hn="data-frame-refused-watch",pn="data-frame-unsupported",mn=/(?:^|\s)stylesheet(?:\s|$)/i;function vn(t,e){let r="";if(t instanceof HTMLScriptElement?r=t.src:t instanceof HTMLLinkElement&&mn.test(t.rel)&&(r=t.href),!r)return null;try{const n=new URL(r);return n.origin===location.origin&&n.pathname.startsWith(e)?n.origin+n.pathname:null}catch{return null}}function _n(t,e,r){if(!t||e!=="query")return;const n="/_f/"+t+"/";document.documentElement.setAttribute(hn,"");const a=location.href,s=fetch,l=setTimeout,u={method:"HEAD",cache:"no-store",credentials:"same-origin"},S=b=>b.ok||b.status===304;let E=!1,g=!1;const h=()=>removeEventListener("error",M,!0),k=async b=>{const T=await s(b,u);if(S(T))g=!0;else if(T.status===403){const C=await s(a,u);if(S(C)){const p=(await s(b,u)).status;p===403?(g=!0,document.documentElement.setAttribute(pn,""),r()):p<500&&(g=!0)}else C.status>=400&&C.status<500&&(g=!0)}},M=b=>{if(g||E)return;if(document.documentElement.hasAttribute(dn)){g=!0,h();return}const T=vn(b.target,n);T&&(E=!0,l(()=>{k(T).catch(()=>{}).finally(()=>{E=!1,g&&h()})},un))};addEventListener("error",M,!0),addEventListener("load",h,{once:!0}),l(h,fn)}var jt="__frame_scroll",Bt="__frame_scroll_framed",yn=150,gn=310,wn=160,bn=3e4,Dt="p,h1,h2,h3,h4,h5,h6,li,pre,blockquote,tr,dt,dd,figcaption,summary",qt=()=>innerWidth<=gn&&innerHeight<=wn,Ut=t=>{const e=document.createTreeWalker(t,NodeFilter.SHOW_TEXT);let r="";for(;r.length<600&&e.nextNode();)r+=e.currentNode.nodeValue.slice(0,600-r.length);const n=r.replace(/\s+/g," ").trim().slice(0,120);let a=2166136261;for(let s=0;s<n.length;s++)a=Math.imul(a^n.charCodeAt(s),16777619);return n.length>11?a>>>0||1:0},xt=t=>{for(let e=t;e&&e!==document.scrollingElement;e=e.parentElement){const r=getComputedStyle(e).position;if(r==="fixed"||r==="sticky"||e!==t&&e.scrollTop)return!1}return!0},En=()=>{const t=[],e=[];try{for(let r=0;r<16;r++){const n=document.elementFromPoint(innerWidth/(r%2?4:2),innerHeight*(r>>1)/8+1);let a=n?.closest(Dt)??n;for(;a&&!a.matches(Dt)&&![...a.childNodes].some(l=>l.nodeType===3&&l.nodeValue?.trim());)a=a.parentElement;const s=a&&!e.includes(a)?Ut(a):0;s&&!t.some(l=>l[0]===s&&l[2]===a.tagName)&&xt(a)&&(e.push(a),t.push([s,Math.round(a.getBoundingClientRect().top),a.tagName]))}}catch{}return t.sort((r,n)=>+(r[1]<0)-+(n[1]<0)),t.length?t.slice(0,3):void 0},Sn=t=>{try{for(const[e,r,n]of t.a??[]){const a=document.getElementsByTagName(n);let s;for(let u=0;u<a.length&&a.length<5e3;u++)Ut(a[u])===e&&(s=s===void 0||s?.contains(a[u])?a[u]:null);const l=s?.getBoundingClientRect();if(l?.height&&s.checkVisibility?.()!==!1&&xt(s)&&isFinite(r))return Math.max(0,Math.round(scrollY+l.top-r))}}catch{}return t.y};function kn(){try{const t=location.ancestorOrigins;return t&&(origin==="null"||t[0]!==origin)?{frame:null}:{frame:frameElement??null,nested:t&&t[1]===origin}}catch{return{frame:null}}}function Rn(){const{frame:t,nested:e}=kn(),r=t!==null,n=()=>{try{return t.inert===!0||(e??!!t?.ownerDocument.defaultView?.frameElement)}catch{return!0}};let a;const s=()=>{if(a===void 0)try{a=location.pathname.replace(/^\/_f\/[^/]{1,128}\//,"")}catch{a=null}return a};let l=0,u=!1,S=!1,E=!1,g={y:0},h=null;const k=R=>{try{if(!r){sessionStorage.setItem(jt,JSON.stringify(R));return}const j=s();j!==null&&!n()&&sessionStorage.setItem(Bt,JSON.stringify({...R,p:j}))}catch{}},M=R=>{if(clearTimeout(l),h===null)return;const j=h;h=null,k({y:j,a:R&&j>0?En():void 0})},b=()=>{if(u){u=!1;return}S=!0,h=scrollY,clearTimeout(l),l=setTimeout(M,yn,!0)};try{addEventListener("scroll",b,{passive:!0}),addEventListener("pagehide",()=>M())}catch{}const T=()=>{if(r&&n())return null;const R=r?Bt:jt;let j;try{j=sessionStorage.getItem(R)}catch{return null}if(j===null)return null;let V;try{V=JSON.parse(j)}catch{V=null}const{y:H,a:ne,p:me}=V??{};if(!(typeof H=="number"&&Number.isFinite(H)&&H>=0)){try{sessionStorage.removeItem(R)}catch{}return null}if(r&&me!==s())return null;const ie=Y=>Array.isArray(Y)&&typeof Y[0]=="number"&&Number.isFinite(Y[1])&&typeof Y[2]=="string";return{y:H,a:Array.isArray(ne)&&ne.length<4&&ne.every(ie)?ne:void 0}};let C=!1,p=-1;const K=R=>{try{const j=scrollY,V=Sn(R);scrollTo({top:V,left:0,behavior:"instant"}),g=qt()?R:{y:V,a:R.a},E=!0,clearTimeout(l),h=null,k(g),p=scrollY,p!==j&&(u=!0);const H=V!==R.y&&document.readyState!=="complete";(p!==V||H)&&!C&&(C=!0,addEventListener("load",()=>{try{scrollY===p&&K(T()??g)}catch{}},{once:!0}))}catch{}},W=()=>{try{return!!location.hash}catch{return!0}};let J=!1;const $=()=>{try{if(J||!qt())return;J=!0;const R=Date.now(),j=()=>{try{removeEventListener("resize",j)}catch{}Date.now()-R>bn||S||W()||K(T()??g)};addEventListener("resize",j)}catch{}};let G=!1,z=!1;return{restore(){if(G)return;if(G=!0,r&&T()===null){k({y:0});return}if(W())return;const R=T();R!==null&&(K(R),$())},promoted(){if(z||(z=!0,W()))return;const R=T();R!==null?(K(R),$()):E&&K(g)}}}function An(t,e,r,n){let a=null;try{a=window.trustedTypes?.createPolicy("frame-runtime",{createScriptURL:S=>S})??null}catch{}const s=window.Worker,l=s?.prototype,u=Object.freeze({Worker:s,workerOn:l?.addEventListener,workerPost:l?.postMessage,workerTerminate:l?.terminate,fetch:window.fetch.bind(window),preventDefault:Event.prototype.preventDefault,now:Date.now,policy:a,origins:e});r(t).then(S=>S?.bootTopLevel?S.bootTopLevel(u,n):n.settle()).catch(()=>n.settle())}var eo="modulepreload",to=function(t){return"/"+t},ro={},no=function(e){return e.pathname.endsWith(".css")},oo=function(e,r,n){if(r in e)return e[r];const a=n();if(!a){e[r]=void 0;return}const s=a.then(()=>{e[r]=void 0},l=>{throw e[r]=void 0,l});return e[r]=s,s},Tn=function(e,r,n){let a=Promise.resolve();function s(l){const u=new Event("vite:preloadError",{cancelable:!0});if(u.payload=l,window.dispatchEvent(u),!u.defaultPrevented)throw l}return a.then(l=>{for(const u of l||[])u.status==="rejected"&&s(u.reason);return e().catch(s)})},On=window===top,Kt=Object.getOwnPropertyDescriptor(window,"claude"),Ke=en(On,window.__FRAME_PREAMBLE?.topLevel,Kt?.writable===!1),st=typeof Ke=="object"&&Ke[0],L=st?cn():ln();(function(){const t=Object.defineProperty,e=globalThis,r=["RTCPeerConnection","webkitRTCPeerConnection","RTCDataChannel","RTCIceCandidate","RTCSessionDescription","RTCRtpSender","RTCRtpReceiver"];let n=0;for(let a=0;a<r.length;a++){const s=r[a];try{t(e,s,{value:void 0,writable:!1,configurable:!1})}catch{try{delete e[s]}catch{}try{t(e,s,{value:void 0,writable:!1,configurable:!0})}catch{}}typeof e[s]=="function"&&n++}if(n&&Ke==="framed")try{L.post({__frame_rtc_lockdown_failed:n},"*")}catch{}})();var $t=1e4,Ln=2e3,it=2e3,lt=Object.freeze([...window.__FRAME_PREAMBLE?.origins??["https://claude.ai","https://preview.claude.ai"]]),Mn="https://*.";function zt(t){for(const e of lt)if(e.endsWith(":*"))try{const r=new URL(t);if(`${r.protocol}//${r.hostname}:*`===e)return!0}catch{}else if(e.startsWith(Mn)){if(Pn(e.slice(10),t))return!0}else if(t===e)return!0;return!1}function Pn(t,e){if(!/^[a-z0-9-]+(\.[a-z0-9-]+)+$/.test(t))return!1;let r;try{r=new URL(e)}catch{return!1}if(r.protocol!=="https:"||r.port!==""||r.origin!==e)return!1;const n=r.hostname;if(!n.endsWith(`.${t}`))return!1;const a=n.slice(0,n.length-t.length-1);return/^[a-z0-9-]+$/.test(a)}var Pe=Object.freeze({...window.__FRAME_PREAMBLE?.capabilities}),Ne=window.__FRAME_PREAMBLE?.transforms,ct=window.__FRAME_PREAMBLE?.comments,ut=window.__FRAME_PREAMBLE?.translate,$e=ir(window.__FRAME_PREAMBLE?.cred),Wt=(()=>{try{const[t]=performance.getEntriesByType("navigation"),e=t?.serverTiming?.find(r=>r.name==="frame-cred-exp");return e!==void 0&&/^\d{1,15}$/.test(e.description)?lr(Number(e.description)):void 0}catch{return}})();function Gt(t){return Tn(()=>import("/_runtime/"+t),void 0)}var ze=new Set,Vt=setTimeout,Nn=fetch,Cn=AbortController,Fn=800+800*Math.random(),Hn=3e3,We=null,Yt=new Map;function In(t,e){let r=Yt.get(t);return r||Yt.set(t,r=jn(t,e)),r}function jn(t,e){if(We?.has(t))return Promise.resolve("csp");if(navigator.onLine===!1)return Promise.resolve("offline");const r=new Cn;let n=!1;return Vt(()=>{n=!0,r.abort()},Hn),Nn("/_runtime/"+t,{signal:r.signal}).then(a=>(r.abort(),a.ok?/javascript/i.test(a.headers.get("content-type")??"")?e instanceof Error&&/:\d+:\d+\)?$/m.test(e.stack??"")?"eval":"served":"mime":"http"),()=>n?"timeout":We?.has(t)?"csp":"net")}function ge(t){if(!We){const e=We=new Set;try{document.addEventListener("securitypolicyviolation",r=>{const n=/\/_runtime\/([^/?#]+)/.exec(r.blockedURI);n&&r.disposition!=="report"&&e.add(n[1])})}catch{}}return Gt(t).catch(()=>new Promise(e=>Vt(e,Fn)).then(()=>Gt(t+"?r=1")).then(e=>(e!==void 0&&ze.add(t),e)))}function Xt(t,e,r){return{contract:t.contract,changes:new Set(t.changes??[]),flags:new Set(t.flags??[]),capabilities:t.capabilities??{},capBudgets:t.capBudgets??{},brokerGen:t.brokerGen,transforms:new Map,shellOrigin:e,shell:r,mount:vt,hooks:Ge,pipe:()=>({wrap:(n,a)=>(...s)=>{try{return a(...s)}catch(l){return Promise.reject(l)}}})}}var we=null,ee=null;function Jt(t,e,r){try{Object.defineProperty(t,e,{value:r,writable:!1,configurable:!1,enumerable:!0})}catch{try{Object.defineProperty(t,e,{value:r,writable:!1,configurable:!0,enumerable:!0})}catch{}}}var ft=!1,Ge={editBefore:null,edit:null};function Bn(t,e,r=!1){const n=[];let a;if(r)try{Ge.editBefore?.(t)}catch{}for(const s of t.elements){const l=document.querySelector(`[data-id="${s.target}"]`);if(!l){a=s.target;break}if([...Object.keys(s.attrsSet??{}),...s.attrsRemoved??[]].some(u=>!hr(u))){a=s.target;break}if(s.text!==void 0&&(!_r(l)||br(l))){a=s.target;break}for(const[u,S]of Object.entries(s.attrsSet??{}))if(!Qt(l,u)){try{l.setAttribute(u,S)}catch{}Zt(l,u,S)}for(const u of s.attrsRemoved??[])Qt(l,u)||(l.removeAttribute(u),Zt(l,u,null));typeof s.text=="string"&&gr(l,s.text),n.push(s.target)}if(r)try{Ge.edit?.(t.seq,n,a)}catch{}if(a!==void 0){L.post({__frame_patch_miss:{seq:t.seq}},e);return}try{document.dispatchEvent(new CustomEvent("claude:edit",{detail:{seq:t.seq,targets:n}}))}catch{}}function Zt(t,e,r){if(!(t instanceof HTMLInputElement))return;const n=e.toLowerCase();n==="checked"?t.checked=r!==null:n==="value"&&t.type!=="file"&&(t.value=r??"")}function Qt(t,e){const r=e.toLowerCase(),n=t;return r==="data-id"||(r==="value"||r==="checked")&&(n.__artifactSecret===!0||/^(password|hidden|file)$/.test(n.type??"")||/(^|\s)(cc-|one-time-code|current-password|new-password)/i.test(`${t.getAttribute("autocomplete")??""} ${n.autocomplete??""}`))}function er(t){if(t.hostBackground===!0)return 0;const e=t.hostBackgroundPaceMs;return typeof e=="number"&&e>0&&e<1/0?e:void 0}function tr(t){const e=document.documentElement;t==="light"||t==="dark"?(e.dataset.theme=t,e.style.colorScheme=t,ft=!0):ft&&(delete e.dataset.theme,e.style.colorScheme="",ft=!1)}var he=new Map,Dn=(t,e)=>Array.isArray(t)&&t.includes(e),dt=null;function ht(){let t;const e={u:new Promise(r=>{t=r}),r:r=>{e.done=!0,t(r)},done:!1,nulled:!1};return e}function Ce(t,e){t.nulled=!0,t.ver=e,t.r(null)}function pt(t,e){for(const[r,n]of he)n.done||(e&&n.asked?e(r,n):Ce(n,t))}function qn(){for(const t of he.values())if(t.asked&&!t.done)return!0;return!1}var Un=Object.freeze(Object.assign(Object.create(null),{call:Function.prototype.call,apply:Function.prototype.apply,bind:Function.prototype.bind})),mt=!1,vt=(t,e)=>{let r=he.get(t);if(r?.nulled&&mt)r=ht(),he.set(t,r);else if(!r||r.done){r?.nulled&&ee&&L.post({__frame_cap_telemetry:{kind:"cap-load-error",cap:t,phase:"install"}},ee);return}const n=typeof e=="function"?Object.setPrototypeOf(e,Un):Object.assign(Object.create(null),e);typeof n.then=="function"&&delete n.then,r.want=void 0,r.r(Object.freeze(n))};function rr(){const t=Kt?.value??{};Jt(window,"claude",t);for(const e of Object.keys(Pe)){if(t[e]!==void 0){Jt(t,e,t[e]);continue}he.set(e,ht())}if(t.use===void 0){const e=r=>{if(typeof r!="string"||!Object.hasOwn(Pe,r))return Promise.resolve(null);let n=he.get(r);return n?(dt&&(n.nulled||n.want!==void 0)&&(n=dt(r,n)),n.asked=!0,n.u):Promise.resolve(t[r]??null)};try{Object.defineProperty(t,"use",{value:e,writable:!0,configurable:!0,enumerable:!1})}catch{}}return t}if(Ke==="framed"){let t;const e=Ne&&ye.test(Ne)?ge(Ne).catch(c=>{t={f:Ne,e:c}}):Promise.resolve(void 0),r=c=>{if(c.type==="auxclick"&&c.button!==1)return;const m=c.target,v=m&&m.closest?m.closest("a[href],area[href]"):null;if(!v)return;const I=v.getAttribute("href");if(!I)return;let D;try{D=new URL(I,document.baseURI)}catch{return}if((D.protocol==="http:"||D.protocol==="https:")&&D.origin!==location.origin){c.preventDefault();const B=(v.getAttribute("target")??"").toLowerCase(),q=c.type==="auxclick"||c.metaKey||c.ctrlKey||c.shiftKey||c.altKey||!["","_self","_top","_parent"].includes(B);L.post({__frame_nav:!0,url:D.href,newTab:q},"*")}};addEventListener("click",r,!0),addEventListener("auxclick",r,!0);const n={},a=c=>{c.isTrusted&&(n.pointer=!0)},s=c=>{c.isTrusted&&(n.click=!0)};addEventListener("pointermove",a,{capture:!0,passive:!0}),addEventListener("click",s,{capture:!0,passive:!0});const l={cb:null};addEventListener("keydown",c=>l.cb?.(c),!0);const u={cb:null};addEventListener("keydown",c=>u.cb?.(c));const S=an();e.then(c=>c?.installEscapeForward?.(l,m=>{ee&&L.post(m,ee)})),e.then(c=>{try{c?.installFocusKeep?.()}catch{}}),e.then(c=>{if(!c?.wireNav)return;const m=L.port("*");c.wireNav(m,()=>p&&Object.hasOwn(p,"nativeNewTab")?p.nativeNewTab:void 0),removeEventListener("click",r,!0),removeEventListener("auxclick",r,!0),removeEventListener("pointermove",a,!0),removeEventListener("click",s,!0),c.wireEngagement?.(n,m,S)});let E=null;try{E=Rn()}catch{}const g=document.readyState==="loading"?new Promise(c=>document.addEventListener("DOMContentLoaded",()=>c(),{once:!0})):Promise.resolve();let h="dcl",k=!1;g.then(()=>{k=!0});let M=null,b=null;try{b=jr(window.name),M=Nt(null,b)}catch{}const T=rr();let C=null;try{C=rn(T,M,{post:(c,m)=>L.post(c,m),dcl:g},b)}catch{}e.then(c=>{try{C&&c?.installHotExtras?.(C)}catch{}});let p=null,K=null,W=0;const J=L.on((c,m,v,I)=>{zt(m)&&Rr(c)&&(I(),p=c.__frame_init,ee=m,J(),clearTimeout(W),K?.())});if($e){const c=Wt===void 0?{__frame_cred:$e}:{__frame_cred:$e,exp:Wt};for(const m of lt)try{m.includes("*")||L.post(c,m)}catch{}}L.post({__frame_connect:!0},"*");try{C?.afterConnect()}catch{}const $=setTimeout,G=clearTimeout,z=()=>new Promise(c=>$(c,0));let R=()=>NaN,j=()=>[];try{R=performance.now.bind(performance),j=performance.getEntriesByType.bind(performance)}catch{}let V=0;const H=()=>{try{L.post({__frame_alive:!0},"*")}catch{}V=$(H,Ln)},ne=()=>G(V);H(),addEventListener("load",ne,{once:!0});const me=new Promise(c=>{K=c,W=setTimeout(()=>{J(),c()},$t)}),ie=new WeakSet;addEventListener("error",c=>{c.target&&ie.add(c.target)},!0);try{_n(Ct(),$e,()=>{e.then(c=>{try{c?.drawRefusedNotice?.()}catch{}})})}catch{}const Y=()=>{let c=[];try{c=[...document.querySelectorAll("link[rel~=stylesheet]:not([rel~=alternate])")].filter(v=>!v.sheet&&!v.disabled&&!ie.has(v)&&v.getAttribute("href")&&URL.canParse(v.href)&&(!v.media||matchMedia(v.media).matches))}catch{}let m=c.length;return m===0?Promise.resolve():new Promise(v=>{try{const I=it-R();I>0&&(h="sheets");const D=$(v,I>0?I<it?I:it:0),B=()=>{--m===0&&(G(D),v())};for(const q of c)q.addEventListener("load",B,{once:!0}),q.addEventListener("error",B,{once:!0})}catch{v()}})};g.then(()=>{try{E?.restore()}catch{}});const be=Promise.all([me,g,e]).then(c=>{if(!p||!ee)return;const m=er(p),v=p.hostOverlays===!0;if(!v&&!m)return;const I=c[2],D=Z=>{try{return Z?.()===!0}catch{return!1}},B={cover:D(I?.declaresCover),...p.hostSides===!0&&{sides:D(I?.declaresSides)},...I?.answerLayoutCheck&&{checks:!0}};if(v&&L.post({__frame_layout:B},ee),m===void 0)return;const q=ee;return z().then(Y).then(()=>{try{I?.watchBackground?.(Z=>L.post({__frame_layout:{...B,background:Z}},q),m)}catch{}})}),Fe={cb:null};L.on((c,m)=>{if(zt(m)&&Ar(c)){try{E?.promoted()}catch{}Fe.cb?.()}}),me.then(async()=>{if(!p||!ee){pt();try{C?.onNoInit()}catch{}return}if(tr(p.theme),p.hostVisible===!1&&e.then(i=>i?.applyHostVisible?.(!1,S)),p.hostKeys!==void 0){const i=ee,_=p.hostKeys;e.then(y=>y?.installHostKeyForward?.(u,_,O=>L.post(O,i),L.port(i)))}try{C?.onInit(p.hot,ee)}catch{}const c=ee,m=L.port(c),v=(i,_)=>L.post({__frame_cap_telemetry:{kind:"cap-load-error",cap:i,phase:_}},c),I=(i,_,y)=>{new Promise(O=>O(In(_,y))).then(O=>v(i,O),()=>v(i))},D=i=>L.post({__frame_cap_recovered:{cap:i}},c);let B=p.brokerGen;const q=()=>C?.boot.ver??"",Z=q(),le=(i,_)=>{const y=q();G(_.t),_.sent=!0,_.want=y,_.t=$(()=>{_.done||(_.sent=!1,Ce(_,y))},$t),L.post({__frame_cap_want:!0,cap:i,ver:y},c)},Ve=(i,_)=>{const y=he.get(i.cap),O=Pe[i.cap];if(!_||!y||y.done||y.want!==i.ver||!ye.test(O))return;if(G(y.t),y.want=void 0,B=i.brokerGen??B,i.ver!==q()){le(i.cap,y);return}if(!i.grant||i.cap==="network"){Ce(y,i.ver);return}const te=we,U=we={...te,capabilities:{...te.capabilities,[i.cap]:i.grant},capBudgets:{...te.capBudgets,[i.cap]:{...te.capBudgets[i.cap],...i.budgets}}};ge(O).then(se=>{ze.has(O)&&D(i.cap),U.brokerGen=B,mt=!0;try{se?.install?.(U)}catch{v(i.cap,"install")}finally{mt=!1}},se=>I(i.cap,O,se)).then(()=>{y.done||Ce(y,i.ver)})};let X=!1,He=!1;L.on((i,_,y)=>{if(_!==c)return;try{if(C?.onShell(i))return}catch{}if(Or(i)&&tr(i.__frame_theme.theme),Vr(i)&&Ve(i,y),y&&Yr(i)&&(B=i.brokerGen??B),Tr(i)){const U=i.__frame_host_visible.visible;e.then(se=>se?.applyHostVisible?.(U,S))}i?.__frame_native_new_tab_off&&delete p?.nativeNewTab,i?.__frame_layout_check&&e.then(U=>U?.answerLayoutCheck?.(i,se=>L.post({__frame_layout_verdict:se},c))),kr(i)&&Bn(i.__frame_patch,c,y);const O=i?.__fc_mode;O&&typeof O=="object"&&!X&&ct&&ye.test(ct)&&(X=!0,ge(ct).then(U=>U.install?.(c,O.on===!0,m)).catch(()=>{}));const te=i?.__ft_cmd;te&&typeof te=="object"&&!He&&ut&&ye.test(ut)&&(He=!0,ge(ut).then(U=>U.install?.(c,te,m)).catch(()=>{}))});const oe=Object.keys(p.capabilities??{}),Ie=oe.filter(i=>Object.hasOwn(Pe,i)).map(i=>[i,Pe[i]]).filter(i=>typeof i[1]=="string"&&ye.test(i[1])),ce=c;let ve=!1,je=()=>{};const Ye=new Promise(i=>{je=()=>{ve=!0,i()}}),_e=()=>(ve||(h="caps"),Ye),Be=M!==null||Ot(p.hot)||p.hostVisible===!1||p.hostOverlays===!0;k&&(h="init");const Ee=er(p)!==void 0,_t=g.then(()=>(Ee&&_e(),Ee?be:void 0)).then(()=>Be?_e():z()).then(Y).then(()=>{let i=!0;try{i=Be||qn()}catch{}return i?_e():void 0}).then(()=>{ne();const i=cr(j,R);L.post(i?{__frame_ready:!0,nav:i,gate:h}:{__frame_ready:!0,gate:h},ce),e.then(_=>{_?.installSizeReporter?.(ce,Fe,m),_?.installPaintReporter?.(m)})}),Se=await Promise.allSettled(Ie.map(([,i])=>ge(i))),ae=await e;if(ae?.buildBoot||(t?I("_transforms",t.f,t.e):v("_transforms")),ae?.buildBoot)try{we=ae.buildBoot(p,ae.TRANSFORMS??{},{shellOrigin:ce,mount:vt,hooks:Ge,shell:m},i=>L.post({__frame_cap_telemetry:i},ce))}catch{v("_transforms","install"),we=Xt(p,ce,m)}else we=Xt(p,ce,m);ae?.buildBoot&&ze.has(Ne??"")&&D("_transforms");const ke=we;ke.brokerGen=B;try{ae?.installAnchorMirror?.(m)}catch{}Se.forEach((i,_)=>{const[y,O]=Ie[_];if(i.status!=="fulfilled"){I(y,O,i.reason);return}ze.has(O)&&D(y);try{i.value?.install?.(ke)}catch{v(y,"install")}});const De=p.capWants===!0,Xe=p.usable,qe=i=>!!q()&&Dn(Xe,i)&&!oe.includes(i);De&&(dt=(i,_)=>{const y=q();if(!y)return _;if(!_.nulled)return _.want!==y&&le(i,_),_;if(y===_.ver&&(_.sent||!qe(i)))return _;const O=ht();return he.set(i,O),le(i,O),O}),pt(Z,De?(i,_)=>q()!==Z||qe(i)?le(i,_):Ce(_,Z):void 0),je(),await _t})}else st&&(rr(),An(st,lt,ge,{settle:pt,mount:vt}))})();</script><!-- /frame-runtime -->
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>訂貨管理</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700&amp;display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#f5f2ec; --paper:#fffdf9; --ink:#2a2521; --muted:#8a8178; --line:#e6dfd4;
+  --accent:#c4472b; --accent-ink:#fff; --soft:#f0ebe2;
+  --ok:#2f7d4f; --ok-bg:#e3f2e8; --warn:#a86a00; --warn-bg:#fbefd5; --ship:#2d5f8f; --ship-bg:#e1ecf7;
+  --radius:12px;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:"Noto Sans TC",system-ui,-apple-system,"PingFang TC","Microsoft JhengHei",sans-serif;font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+button,input,select,textarea{font:inherit;color:inherit}
+button{cursor:pointer}
+.wrap{max-width:1100px;margin:0 auto;padding:20px 16px 80px}
+
+/* header */
+header.top{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+header.top h1{font-size:22px;margin:0;letter-spacing:.04em;display:flex;align-items:center;gap:10px}
+header.top h1 .stamp{display:inline-grid;place-items:center;width:32px;height:32px;border-radius:8px;background:var(--accent);color:#fff;font-size:15px;transform:rotate(-6deg)}
+.savestate{font-size:13px;color:var(--muted);display:flex;align-items:center;gap:6px}
+.savestate .dot{width:8px;height:8px;border-radius:50%;background:var(--ok)}
+.savestate.dirty .dot{background:var(--warn)}
+.spacer{flex:1}
+.btn{border:1px solid var(--line);background:var(--paper);padding:8px 14px;border-radius:10px;font-weight:500;display:inline-flex;align-items:center;gap:6px;white-space:nowrap}
+.btn:hover{background:var(--soft)}
+.btn.primary{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.btn.primary:hover{filter:brightness(.95)}
+.btn.ghost{border-color:transparent;background:transparent}
+.btn.danger{color:#b42318;border-color:#f1c4bd}
+.btn:disabled{opacity:.5;cursor:default}
+.btn.icon{padding:8px 10px}
+
+/* tabs */
+.tabs{display:flex;gap:4px;overflow-x:auto;border-bottom:2px solid var(--line);margin-bottom:14px;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{border:0;background:transparent;padding:10px 14px;border-radius:10px 10px 0 0;font-weight:500;color:var(--muted);white-space:nowrap;position:relative;bottom:-2px;border-bottom:2px solid transparent}
+.tab:hover{color:var(--ink)}
+.tab.on{color:var(--accent);border-bottom-color:var(--accent);font-weight:700}
+.tab .n{font-size:12px;background:var(--soft);color:var(--muted);border-radius:999px;padding:0 7px;margin-left:4px}
+.tab.on .n{background:#f7e1db;color:var(--accent)}
+
+/* stats */
+.stats{display:grid;grid-template-columns:repeat(5,1fr);gap:10px;margin-bottom:14px}
+.stat{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);padding:10px 14px}
+.stat .k{font-size:12px;color:var(--muted)}
+.stat .v{font-size:22px;font-weight:700;font-variant-numeric:tabular-nums}
+.stat.hl .v{color:var(--accent)}
+
+/* filters */
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:12px}
+.search{flex:1;min-width:180px;border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:8px 12px}
+select.sel{border:1px solid var(--line);background:var(--paper);border-radius:10px;padding:8px 10px}
+.ipchips{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:14px}
+.chip{border:1px solid var(--line);background:var(--paper);border-radius:999px;padding:3px 12px;font-size:13px}
+.chip.on{outline:2px solid var(--ink);outline-offset:-1px}
+
+/* list */
+.list{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden}
+.row{display:grid;grid-template-columns:110px 120px 1fr 70px 150px 100px 44px;align-items:center;gap:12px;padding:12px 14px;border-top:1px solid var(--line)}
+.row:first-child{border-top:0}
+.row.head{background:var(--soft);font-size:13px;color:var(--muted);font-weight:500;padding-top:8px;padding-bottom:8px}
+.row.head > div{text-align:center}
+.row.head > div:nth-child(3){text-align:left}
+.thumb{width:110px;height:84px;border-radius:8px;border:1px solid var(--line);background:var(--soft);padding:0;overflow:hidden;display:grid;place-items:center;color:var(--muted);font-size:12px}
+.thumb img{width:100%;height:100%;object-fit:cover;display:block}
+.c-ip,.c-pre,.c-ship{text-align:center}
+.pill{display:inline-block;border-radius:6px;padding:2px 10px;font-size:14px;font-weight:500;white-space:nowrap;max-width:100%;overflow:hidden;text-overflow:ellipsis}
+.name{font-weight:500;word-break:break-word}
+.name.empty{color:var(--muted);font-weight:400}
+.note{font-size:13px;color:var(--muted);white-space:pre-wrap;word-break:break-word}
+.meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:4px}
+.status{font-size:12px;border-radius:999px;padding:1px 9px;font-weight:500}
+.s-wait{background:var(--soft);color:var(--muted)}
+.s-ship{background:var(--ship-bg);color:var(--ship)}
+.s-part{background:var(--warn-bg);color:var(--warn)}
+.s-done{background:var(--ok-bg);color:var(--ok)}
+.s-over{background:#efe4f7;color:#6b3d8f}
+.cattag{font-size:12px;border:1px solid var(--line);border-radius:999px;padding:0 8px;color:var(--muted)}
+.c-pre b{font-size:18px;font-variant-numeric:tabular-nums}
+.lbl{display:none;font-size:12px;color:var(--muted)}
+.stepper{display:inline-flex;align-items:center;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:#fff}
+.stepper button{border:0;background:transparent;width:34px;height:34px;font-size:18px;color:var(--muted)}
+.stepper button:hover{background:var(--soft);color:var(--ink)}
+.stepper input{width:44px;height:34px;border:0;border-left:1px solid var(--line);border-right:1px solid var(--line);text-align:center;font-size:16px;font-weight:700;font-variant-numeric:tabular-nums;outline:none}
+.c-arr{text-align:center}
+.chk{display:inline-flex;align-items:center;gap:6px;cursor:pointer;user-select:none}
+.chk input{width:22px;height:22px;accent-color:var(--ship);cursor:pointer}
+.chk span{display:none;font-size:13px}
+.c-edit{border:0;background:transparent;width:36px;height:36px;border-radius:8px;color:var(--muted);font-size:16px}
+.c-edit:hover{background:var(--soft);color:var(--ink)}
+.empty-state{padding:48px 16px;text-align:center;color:var(--muted)}
+
+@media (max-width:760px){
+  .stats{grid-template-columns:repeat(3,1fr)}
+  .stats .stat:nth-child(n+4){grid-column:span 1}
+  .stat .v{font-size:18px}
+  .row.head{display:none}
+  .row{grid-template-columns:88px 1fr auto;grid-template-areas:"thumb ip edit" "thumb name name" "pre arr ship";gap:6px 12px;align-items:start}
+  .thumb{grid-area:thumb;width:88px;height:88px}
+  .c-ip{grid-area:ip;text-align:left}
+  .c-name{grid-area:name}
+  .c-pre{grid-area:pre;text-align:left;align-self:center}
+  .c-arr{grid-area:arr;text-align:left;display:flex;align-items:center;gap:6px}
+  .c-ship{grid-area:ship;align-self:center}
+  .c-edit{grid-area:edit;justify-self:end;margin-top:-6px}
+  .lbl{display:inline}
+  .c-pre{display:flex;gap:6px;align-items:baseline}
+  .chk span{display:inline}
+  header.top h1{font-size:19px}
+  header.top{gap:8px;flex-wrap:nowrap}
+  .savestate{font-size:12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+  header.top .btn{padding:7px 10px;font-size:14px}
+  .lbl,.chk span{white-space:nowrap}
+  .stepper button{width:30px;height:32px}
+  .stepper input{width:38px;height:32px}
+  .search{min-width:100%}
+  .filters .sel{flex:1}
+}
+
+/* modal */
+.mask{position:fixed;inset:0;background:rgba(30,25,20,.45);display:flex;align-items:center;justify-content:center;padding:16px;z-index:50}
+.modal{background:var(--paper);border-radius:16px;width:100%;max-width:520px;max-height:calc(100vh - 32px);overflow:auto;box-shadow:0 20px 60px rgba(0,0,0,.25)}
+.modal h2{font-size:18px;margin:0;padding:18px 20px 0}
+.modal .body{padding:16px 20px}
+.modal .foot{display:flex;gap:8px;padding:12px 20px 18px;border-top:1px solid var(--line)}
+.field{margin-bottom:14px}
+.field > label{display:block;font-size:13px;color:var(--muted);margin-bottom:5px;font-weight:500}
+.field input[type=text],.field input[type=number],.field select,.field textarea{width:100%;border:1px solid var(--line);border-radius:10px;padding:9px 12px;background:#fff}
+.field textarea{min-height:60px;resize:vertical}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.drop{border:2px dashed var(--line);border-radius:12px;min-height:150px;display:grid;place-items:center;text-align:center;color:var(--muted);font-size:14px;cursor:pointer;overflow:hidden;position:relative;background:#fff}
+.drop.over{border-color:var(--accent);background:#fdf3f0}
+.drop img{max-width:100%;max-height:260px;display:block}
+.drop .x{position:absolute;top:6px;right:6px;border:0;background:rgba(0,0,0,.6);color:#fff;border-radius:999px;width:28px;height:28px}
+.shipbox{display:flex;align-items:center;gap:8px;padding:10px 12px;border:1px solid var(--line);border-radius:10px;background:#fff;cursor:pointer}
+.shipbox input{width:20px;height:20px;accent-color:var(--ship)}
+.zoom{max-width:min(92vw,900px);max-height:88vh;border-radius:10px;display:block;box-shadow:0 20px 60px rgba(0,0,0,.4)}
+.catrow{display:flex;gap:6px;align-items:center;margin-bottom:8px}
+.catrow input{flex:1;border:1px solid var(--line);border-radius:10px;padding:8px 10px;background:#fff}
+.catrow .cnt{font-size:12px;color:var(--muted);width:48px;text-align:right}
+.hint{font-size:12px;color:var(--muted)}
+.sec{font-weight:700;margin:4px 0 10px}
+hr.sep{border:0;border-top:1px solid var(--line);margin:18px 0}
+textarea.mono{width:100%;min-height:110px;font-family:ui-monospace,Menlo,monospace;font-size:12px;border:1px solid var(--line);border-radius:10px;padding:8px}
+
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 18px;border-radius:999px;font-size:14px;z-index:80;box-shadow:0 8px 24px rgba(0,0,0,.2);max-width:90vw;text-align:center}
+.fab{display:none}
+@media (max-width:760px){
+  .fab{display:grid;place-items:center;position:fixed;right:18px;bottom:20px;width:56px;height:56px;border-radius:50%;background:var(--accent);color:#fff;border:0;font-size:28px;box-shadow:0 8px 20px rgba(196,71,43,.4);z-index:40}
+  .hide-m{display:none}
+}
+</style>
+</head>
+<body>
+<div id="root"></div>
+<script type="application/json" id="data">{"v":1,"savedAt":1794549841969,"cats":["一番賞","陀螺","盲盒","毛絨吊飾","扭蛋","盒玩","卡牌"],"items":[{"id":"a1","cat":"一番賞","ip":"海賊王","img":"","name":"明年的海賊一番賞","pre":3,"arr":"","ship":false,"note":""},{"id":"a2","cat":"一番賞","ip":"東京喰種","img":"","name":"好像也是明年的","pre":3,"arr":"","ship":false,"note":""},{"id":"a3","cat":"一番賞","ip":"三麗鷗","img":"","name":"","pre":1,"arr":"","ship":true,"note":""}]}</script>
+<script id="app">
+(function(){
+"use strict";
+const HEAD_HTML = document.head.innerHTML;
+const APP_SRC = document.getElementById('app').textContent;
+const EMBED = JSON.parse(document.getElementById('data').textContent);
+let state = JSON.parse(JSON.stringify(EMBED));
+let dirty = false;
+let base = EMBED.savedAt;      // savedAt the local draft is based on
+let artifact = null;            // claude.ai self-publish capability
+let downloads = null;           // claude.ai file-save capability
+let mode = 'pending';           // 'artifact' | 'file' | 'pending'
+const ui = { tab:'__all', q:'', ip:'', status:'', sort:'order' };
+const STORE_KEY = 'order-mgr:' + location.pathname;
+
+/* ---------- utils ---------- */
+const $ = (s, el=document) => el.querySelector(s);
+const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2,7);
+const num = v => (v === '' || v == null) ? null : Number(v);
+const PALETTE = [['#d5e8ec','#2f5d68'],['#ecd9f3','#6b3d8f'],['#e6e3df','#4f4a44'],['#fde2d6','#a2401b'],['#dff0d8','#3d6b2f'],['#fff0c2','#806000'],['#dbe4fb','#2f4a8f'],['#f9dbe5','#97305a'],['#d8f1ec','#1f6b5c'],['#f3e3d3','#7a4a1e']];
+function ipColor(ip){ let h=0; for (const ch of String(ip)) h = (h*31 + ch.codePointAt(0)) >>> 0; return PALETTE[h % PALETTE.length]; }
+function pill(ip){ if(!ip) return '<span class="pill" style="background:var(--soft);color:var(--muted)">未分類</span>'; const [b,f]=ipColor(ip); return `<span class="pill" style="background:${b};color:${f}">${esc(ip)}</span>`; }
+function statusOf(it){
+  const a = num(it.arr), p = Number(it.pre)||0;
+  if (a != null && a > 0 && a > p && p > 0) return ['s-over','多到 '+(a-p)];
+  if (a != null && p > 0 && a >= p) return ['s-done','已到齊'];
+  if (a != null && a > 0) return ['s-part','缺 '+(p-a)];
+  if (it.ship) return ['s-ship','已入港'];
+  return ['s-wait','等待中'];
+}
+function statusKey(it){ return statusOf(it)[0]; }
+let toastT;
+function toast(msg){ let t=$('.toast'); if(!t){ t=document.createElement('div'); t.className='toast'; document.body.appendChild(t);} t.textContent=msg; clearTimeout(toastT); toastT=setTimeout(()=>t.remove(),2600); }
+
+/* ---------- local draft (IndexedDB) ---------- */
+function idb(){ return new Promise((res,rej)=>{ try{ const r=indexedDB.open('order-mgr',1); r.onupgradeneeded=()=>r.result.createObjectStore('kv'); r.onsuccess=()=>res(r.result); r.onerror=()=>rej(r.error); }catch(e){ rej(e); } }); }
+async function draftGet(){ try{ const db=await idb(); return await new Promise((res,rej)=>{ const q=db.transaction('kv').objectStore('kv').get(STORE_KEY); q.onsuccess=()=>res(q.result); q.onerror=()=>rej(q.error); }); }catch(e){ return null; } }
+async function draftSet(v){ try{ const db=await idb(); await new Promise((res,rej)=>{ const tx=db.transaction('kv','readwrite'); tx.objectStore('kv').put(v,STORE_KEY); tx.oncomplete=res; tx.onerror=()=>rej(tx.error); }); }catch(e){} }
+let draftTimer;
+function changed(){ dirty = true; clearTimeout(draftTimer); draftTimer = setTimeout(()=>draftSet({base, dirty:true, state}), 300); render(); }
+
+/* ---------- export ---------- */
+function buildHTML(st=state){
+  const json = JSON.stringify(st).replace(/</g,'\\u003c');
+  return '<!DOCTYPE html>\n<html lang="zh-Hant">\n<head>' + HEAD_HTML + '</head>\n<body>\n<div id="root"></div>\n<script type="application/json" id="data">' + json + '<\/script>\n<script id="app">' + APP_SRC + '<\/script>\n</body>\n</html>\n';
+}
+async function save(){
+  if (mode === 'artifact'){
+    const btn = $('#saveBtn'); if (btn){ btn.disabled = true; btn.textContent = '儲存中…'; }
+    state.savedAt = Date.now();
+    await draftSet({base:state.savedAt, dirty:false, state});
+    try { await artifact.publish(buildHTML()); dirty=false; toast('已儲存'); }
+    catch(e){
+      const code = (e && (e.code || e.name || e.message)) || '';
+      await draftSet({base, dirty:true, state});
+      if (/not_writer|not_granted/.test(code)) toast('你只有檢視權限，無法儲存');
+      else if (/conflict/.test(code)) toast('其他地方剛更新過，頁面將重新載入');
+      else toast('儲存失敗：' + code);
+      render();
+    }
+  } else {
+    state.savedAt = Date.now();
+    const blob = new Blob([buildHTML()], {type:'text/html'});
+    const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
+    a.download = 'index.html';
+    document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href), 4000);
+    base = state.savedAt;
+    await draftSet({base, dirty:false, state});
+    dirty = false; render(); toast('已下載含最新資料的 HTML');
+  }
+}
+
+async function exportHTML(){
+  const html = buildHTML({...state, savedAt: Date.now()});
+  const filename = 'index.html';
+  if (downloads){
+    try { await downloads.save({filename, data: html}); toast('已匯出 HTML'); }
+    catch(e){ const c=(e&&(e.code||e.message))||''; if(!/cancel|declin|abort/i.test(c)) toast('匯出失敗：'+c); }
+    return;
+  }
+  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([html],{type:'text/html'}));
+  a.download = filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href), 4000);
+  toast('已匯出 HTML');
+}
+
+/* ---------- image ---------- */
+function fileToDataURL(file, max=640, q=0.78){
+  return new Promise((res,rej)=>{
+    const url = URL.createObjectURL(file); const img = new Image();
+    img.onload = ()=>{ const s=Math.min(1, max/Math.max(img.width,img.height)); const c=document.createElement('canvas'); c.width=Math.round(img.width*s); c.height=Math.round(img.height*s); const x=c.getContext('2d'); x.fillStyle='#fff'; x.fillRect(0,0,c.width,c.height); x.drawImage(img,0,0,c.width,c.height); URL.revokeObjectURL(url); res(c.toDataURL('image/jpeg',q)); };
+    img.onerror = ()=>{ URL.revokeObjectURL(url); rej(new Error('無法讀取圖片')); };
+    img.src = url;
+  });
+}
+
+/* ---------- view ---------- */
+function visibleItems(){
+  const q = ui.q.trim().toLowerCase();
+  let list = state.items.filter(it =>
+    (ui.tab === '__all' || it.cat === ui.tab) &&
+    (!ui.ip || it.ip === ui.ip) &&
+    (!ui.status || statusKey(it) === ui.status || (ui.status==='pending' && !['s-done','s-over'].includes(statusKey(it)))) &&
+    (!q || [it.ip,it.name,it.note,it.cat].join(' ').toLowerCase().includes(q))
+  );
+  if (ui.sort === 'ip') list = list.slice().sort((a,b)=> (a.ip||'').localeCompare(b.ip||'','zh-Hant'));
+  if (ui.sort === 'status'){ const o={'s-wait':0,'s-ship':1,'s-part':2,'s-over':3,'s-done':4}; list = list.slice().sort((a,b)=>o[statusKey(a)]-o[statusKey(b)]); }
+  if (ui.sort === 'new') list = list.slice().reverse();
+  return list;
+}
+function render(){
+  const tabItems = state.items.filter(it => ui.tab==='__all' || it.cat===ui.tab);
+  const ips = [...new Set(tabItems.map(it=>it.ip).filter(Boolean))];
+  if (ui.ip && !ips.includes(ui.ip)) ui.ip = '';
+  const list = visibleItems();
+  const sum = (arr,f)=>arr.reduce((s,x)=>s+(f(x)||0),0);
+  const pre = sum(list,x=>Number(x.pre)), arr = sum(list,x=>num(x.arr)||0);
+  const shipped = list.filter(x=>x.ship).length;
+  const lacking = sum(list, x=> Math.max(0,(Number(x.pre)||0)-(num(x.arr)||0)));
+  const count = c => state.items.filter(it=>it.cat===c).length;
+  const saveLabel = mode==='artifact' ? '儲存' : mode==='file' ? '下載 HTML' : '…';
+
+  $('#root').innerHTML = `
+  <div class="wrap">
+    <header class="top">
+      <h1><span class="stamp">訂</span>訂貨管理</h1>
+      <span class="savestate ${dirty?'dirty':''}"><span class="dot"></span>${dirty ? (mode==='file'?'已存在這台裝置，尚未匯出':'尚未儲存') : '已儲存'}</span>
+      <span class="spacer"></span>
+      <button class="btn icon" data-act="settings" title="設定">⚙︎<span class="hide-m">設定</span></button>
+      ${mode==='artifact' && downloads ? '<button class="btn" data-act="export" title="匯出含最新資料的 HTML">⇩<span class="hide-m">匯出 HTML</span></button>' : ''}
+      <button class="btn ${mode==='artifact'&&dirty?'primary':''}" id="saveBtn" data-act="save" ${mode==='pending'?'disabled':''}>${saveLabel}</button>
+      <button class="btn primary hide-m" data-act="add">＋ 新增商品</button>
+    </header>
+
+    <nav class="tabs">
+      <button class="tab ${ui.tab==='__all'?'on':''}" data-tab="__all">全部<span class="n">${state.items.length}</span></button>
+      ${state.cats.map(c=>`<button class="tab ${ui.tab===c?'on':''}" data-tab="${esc(c)}">${esc(c)}<span class="n">${count(c)}</span></button>`).join('')}
+    </nav>
+
+    <section class="stats">
+      <div class="stat"><div class="k">品項</div><div class="v">${list.length}</div></div>
+      <div class="stat"><div class="k">預購數量</div><div class="v">${pre}</div></div>
+      <div class="stat"><div class="k">已到貨</div><div class="v">${arr}</div></div>
+      <div class="stat hl"><div class="k">尚缺</div><div class="v">${lacking}</div></div>
+      <div class="stat"><div class="k">大船入港</div><div class="v">${shipped}<span style="font-size:13px;color:var(--muted);font-weight:400"> / ${list.length}</span></div></div>
+    </section>
+
+    <div class="filters">
+      <input class="search" id="q" placeholder="搜尋 IP、名字、備註…" value="${esc(ui.q)}">
+      <select class="sel" id="fStatus">
+        ${[['','全部狀態'],['pending','未到齊'],['s-wait','等待中'],['s-ship','已入港'],['s-part','部分到貨'],['s-done','已到齊'],['s-over','多到']].map(([v,t])=>`<option value="${v}" ${ui.status===v?'selected':''}>${t}</option>`).join('')}
+      </select>
+      <select class="sel" id="fSort">
+        ${[['order','新增順序'],['new','最新在前'],['ip','依 IP'],['status','依狀態']].map(([v,t])=>`<option value="${v}" ${ui.sort===v?'selected':''}>${t}</option>`).join('')}
+      </select>
+    </div>
+    ${ips.length>1 ? `<div class="ipchips"><button class="chip ${!ui.ip?'on':''}" data-ip="">全部 IP</button>${ips.map(ip=>{const [b,f]=ipColor(ip);return `<button class="chip ${ui.ip===ip?'on':''}" data-ip="${esc(ip)}" style="background:${b};color:${f};border-color:${b}">${esc(ip)}</button>`}).join('')}</div>` : ''}
+
+    <div class="list">
+      ${list.length ? `<div class="row head"><div>圖片</div><div>IP</div><div>名字</div><div>預購</div><div>實際到貨</div><div>大船入港</div><div></div></div>` + list.map(rowHTML).join('')
+        : `<div class="empty-state">${state.items.length ? '沒有符合條件的商品' : '還沒有商品，按「新增商品」開始'}</div>`}
+    </div>
+  </div>
+  <button class="fab" data-act="add" aria-label="新增商品">＋</button>`;
+}
+function rowHTML(it){
+  const [sc, st] = statusOf(it);
+  return `<div class="row" data-id="${esc(it.id)}">
+    <button class="thumb" data-act="${it.img?'zoom':'edit'}">${it.img?`<img src="${it.img}" alt="">`:'＋ 圖片'}</button>
+    <div class="c-ip">${pill(it.ip)}</div>
+    <div class="c-name">
+      <div class="name ${it.name?'':'empty'}">${it.name?esc(it.name):'（未命名）'}</div>
+      ${it.note?`<div class="note">${esc(it.note)}</div>`:''}
+      <div class="meta"><span class="status ${sc}">${st}</span>${ui.tab==='__all'?`<span class="cattag">${esc(it.cat)}</span>`:''}</div>
+    </div>
+    <div class="c-pre"><span class="lbl">預購</span><b>${Number(it.pre)||0}</b></div>
+    <div class="c-arr"><span class="lbl">實到</span><div class="stepper"><button data-act="dec" aria-label="減少">−</button><input data-act="arr" inputmode="numeric" placeholder="—" value="${it.arr===''||it.arr==null?'':esc(it.arr)}"><button data-act="inc" aria-label="增加">＋</button></div></div>
+    <div class="c-ship"><label class="chk"><input type="checkbox" data-act="ship" ${it.ship?'checked':''}><span>大船入港</span></label></div>
+    <button class="c-edit" data-act="edit" title="編輯">✎</button>
+  </div>`;
+}
+
+/* ---------- modals ---------- */
+function openModal(html, wide){
+  closeModal();
+  const m = document.createElement('div'); m.className='mask'; m.id='mask';
+  m.innerHTML = html;
+  m.addEventListener('mousedown', e=>{ if(e.target===m) closeModal(); });
+  document.body.appendChild(m);
+  return m;
+}
+function closeModal(){ const m=$('#mask'); if(m) m.remove(); }
+function ask(msg, okText='確定', danger=true){
+  return new Promise(res=>{
+    const m = openModal(`<div class="modal" style="max-width:380px"><div class="body" style="padding-top:22px">${esc(msg)}</div><div class="foot"><span class="spacer"></span><button class="btn" data-r="0">取消</button><button class="btn ${danger?'danger':'primary'}" data-r="1">${esc(okText)}</button></div></div>`);
+    m.addEventListener('click', e=>{ const b=e.target.closest('[data-r]'); if(b){ closeModal(); res(b.dataset.r==='1'); } });
+  });
+}
+function editItem(id){
+  const it = id ? state.items.find(x=>x.id===id) : null;
+  const d = it ? {...it} : {id:uid(), cat: ui.tab==='__all' ? state.cats[0] : ui.tab, ip: ui.ip||'', img:'', name:'', pre:1, arr:'', ship:false, note:''};
+  const allIps = [...new Set(state.items.map(x=>x.ip).filter(Boolean))];
+  const m = openModal(`<form class="modal" id="f">
+    <h2>${it?'編輯商品':'新增商品'}</h2>
+    <div class="body">
+      <div class="field"><label>圖片（點選、拖曳或直接貼上）</label>
+        <div class="drop" id="drop">${d.img?`<img src="${d.img}"><button type="button" class="x" id="rmImg" aria-label="移除">✕</button>`:'<div>📷<br>點選上傳圖片<br><span class="hint">也可以拖曳或 Ctrl+V 貼上</span></div>'}</div>
+        <input type="file" id="file" accept="image/*" hidden>
+      </div>
+      <div class="grid2">
+        <div class="field"><label>分類</label><select id="fcat">${state.cats.map(c=>`<option ${c===d.cat?'selected':''}>${esc(c)}</option>`).join('')}</select></div>
+        <div class="field"><label>IP</label><input type="text" id="fip" list="iplist" value="${esc(d.ip)}" placeholder="例如：海賊王"><datalist id="iplist">${allIps.map(i=>`<option value="${esc(i)}">`).join('')}</datalist></div>
+      </div>
+      <div class="field"><label>名字</label><input type="text" id="fname" value="${esc(d.name)}" placeholder="商品名稱"></div>
+      <div class="grid2">
+        <div class="field"><label>預購數量</label><input type="number" min="0" id="fpre" value="${esc(d.pre)}"></div>
+        <div class="field"><label>實際到貨數量</label><input type="number" min="0" id="farr" value="${esc(d.arr)}" placeholder="還沒到可留空"></div>
+      </div>
+      <div class="field"><label class="shipbox"><input type="checkbox" id="fship" ${d.ship?'checked':''}> 大船入港</label></div>
+      <div class="field"><label>備註</label><textarea id="fnote" placeholder="發售時間、價格、賣家…">${esc(d.note)}</textarea></div>
+    </div>
+    <div class="foot">
+      ${it?'<button type="button" class="btn danger" id="del">刪除</button>':''}
+      <span class="spacer"></span>
+      <button type="button" class="btn" id="cancel">取消</button>
+      <button type="submit" class="btn primary">${it?'儲存變更':'新增'}</button>
+    </div>
+  </form>`);
+  const drop = $('#drop',m), file = $('#file',m);
+  const setImg = async f => { if(!f || !/^image\//.test(f.type)) return; try{ d.img = await fileToDataURL(f); drop.innerHTML = `<img src="${d.img}"><button type="button" class="x" id="rmImg" aria-label="移除">✕</button>`; }catch(e){ toast(e.message); } };
+  drop.addEventListener('click', e=>{ if(e.target.closest('#rmImg')){ e.stopPropagation(); d.img=''; drop.innerHTML='<div>📷<br>點選上傳圖片<br><span class="hint">也可以拖曳或 Ctrl+V 貼上</span></div>'; return; } file.click(); });
+  file.addEventListener('change', ()=> setImg(file.files[0]));
+  drop.addEventListener('dragover', e=>{ e.preventDefault(); drop.classList.add('over'); });
+  drop.addEventListener('dragleave', ()=> drop.classList.remove('over'));
+  drop.addEventListener('drop', e=>{ e.preventDefault(); drop.classList.remove('over'); setImg(e.dataTransfer.files[0]); });
+  m.addEventListener('paste', e=>{ const f=[...(e.clipboardData?.files||[])].find(f=>/^image\//.test(f.type)); if(f){ e.preventDefault(); setImg(f); } });
+  $('#cancel',m).onclick = closeModal;
+  if (it) $('#del',m).onclick = async ()=>{ if(await ask('確定刪除這個商品？','刪除')){ state.items = state.items.filter(x=>x.id!==it.id); changed(); } else editItem(it.id); };
+  $('#f',m).addEventListener('submit', e=>{
+    e.preventDefault();
+    d.cat = $('#fcat',m).value; d.ip = $('#fip',m).value.trim(); d.name = $('#fname',m).value.trim();
+    d.pre = Math.max(0, parseInt($('#fpre',m).value,10)||0);
+    const a = $('#farr',m).value.trim(); d.arr = a==='' ? '' : Math.max(0, parseInt(a,10)||0);
+    d.ship = $('#fship',m).checked; d.note = $('#fnote',m).value.trim();
+    if (it) Object.assign(it, d); else state.items.push(d);
+    closeModal(); changed(); toast(it?'已更新':'已新增');
+  });
+  if(!it) $('#fip',m).focus();
+}
+function settings(){
+  const m = openModal(`<div class="modal">
+    <h2>設定</h2>
+    <div class="body">
+      <div class="sec">分類分頁</div>
+      <div id="cats"></div>
+      <div class="catrow"><input id="newcat" placeholder="新增分類名稱"><button class="btn" id="addcat">新增</button></div>
+      <hr class="sep">
+      <div class="sec">資料備份</div>
+      <p class="hint" style="margin-top:0">複製下面的 JSON 存起來就是完整備份（含圖片）。要還原時貼回來按「匯入」。</p>
+      <textarea class="mono" id="json"></textarea>
+      <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
+        <button class="btn" id="copy">複製備份</button>
+        <button class="btn" id="imp">匯入（取代目前資料）</button>
+        <label class="btn">從檔案匯入<input type="file" id="impfile" accept=".json,application/json" hidden></label>
+      </div>
+    </div>
+    <div class="foot"><span class="spacer"></span><button class="btn primary" id="close">完成</button></div>
+  </div>`);
+  const drawCats = ()=>{
+    $('#cats',m).innerHTML = state.cats.map((c,i)=>`<div class="catrow" data-i="${i}">
+      <button class="btn icon" data-mv="-1" ${i===0?'disabled':''} title="上移">↑</button>
+      <input value="${esc(c)}" data-rn>
+      <span class="cnt">${state.items.filter(x=>x.cat===c).length} 項</span>
+      <button class="btn icon danger" data-rm title="刪除">✕</button></div>`).join('');
+  };
+  drawCats();
+  $('#json',m).value = JSON.stringify(state);
+  $('#cats',m).addEventListener('change', e=>{
+    const inp = e.target.closest('[data-rn]'); if(!inp) return;
+    const i = +inp.closest('.catrow').dataset.i, old = state.cats[i], nv = inp.value.trim();
+    if (!nv || (nv!==old && state.cats.includes(nv))){ toast('名稱不可空白或重複'); inp.value = old; return; }
+    state.cats[i] = nv; state.items.forEach(x=>{ if(x.cat===old) x.cat=nv; }); if(ui.tab===old) ui.tab=nv; changed();
+  });
+  $('#cats',m).addEventListener('click', async e=>{
+    const row = e.target.closest('.catrow'); if(!row) return; const i = +row.dataset.i;
+    if (e.target.closest('[data-mv]')){ const [c]=state.cats.splice(i,1); state.cats.splice(i-1,0,c); changed(); drawCats(); }
+    if (e.target.closest('[data-rm]')){
+      const c = state.cats[i], n = state.items.filter(x=>x.cat===c).length;
+      if (n){ toast(`「${c}」裡還有 ${n} 項商品，請先移到其他分類`); return; }
+      state.cats.splice(i,1); if(ui.tab===c) ui.tab='__all'; changed(); drawCats();
+    }
+  });
+  $('#addcat',m).onclick = ()=>{ const v=$('#newcat',m).value.trim(); if(!v||state.cats.includes(v)) return toast('名稱不可空白或重複'); state.cats.push(v); $('#newcat',m).value=''; changed(); drawCats(); };
+  $('#copy',m).onclick = async ()=>{ try{ await navigator.clipboard.writeText(JSON.stringify(state)); toast('已複製'); }catch(e){ $('#json',m).select(); toast('請手動複製選取的文字'); } };
+  const doImport = async txt => {
+    try{ const s = JSON.parse(txt); if(!Array.isArray(s.items)||!Array.isArray(s.cats)) throw 0;
+      if(!(await ask(`匯入 ${s.items.length} 項商品並取代目前資料？`,'匯入'))) return settings();
+      state = {v:1, savedAt:state.savedAt, cats:s.cats, items:s.items}; ui.tab='__all'; changed(); toast('已匯入');
+    }catch(e){ toast('格式不正確，無法匯入'); }
+  };
+  $('#imp',m).onclick = ()=> doImport($('#json',m).value);
+  $('#impfile',m).onchange = async e=>{ const f=e.target.files[0]; if(f) doImport(await f.text()); };
+  $('#close',m).onclick = closeModal;
+}
+
+/* ---------- events ---------- */
+document.addEventListener('click', e=>{
+  const t = e.target;
+  const tab = t.closest('[data-tab]'); if (tab){ ui.tab = tab.dataset.tab; ui.ip=''; render(); return; }
+  const chip = t.closest('[data-ip]'); if (chip && !t.closest('.modal')){ ui.ip = chip.dataset.ip; render(); return; }
+  const a = t.closest('[data-act]'); if (!a || t.closest('.modal')) return;
+  const act = a.dataset.act, row = a.closest('.row'), it = row && state.items.find(x=>x.id===row.dataset.id);
+  if (act==='add') editItem();
+  else if (act==='save') save();
+  else if (act==='export') exportHTML();
+  else if (act==='settings') settings();
+  else if (act==='edit' && it) editItem(it.id);
+  else if (act==='zoom' && it){ const m=openModal(`<img class="zoom" src="${it.img}" alt="">`); m.addEventListener('click',closeModal); }
+  else if (act==='inc' && it){ it.arr = (num(it.arr)||0)+1; changed(); }
+  else if (act==='dec' && it){ const v=num(it.arr); it.arr = v==null||v<=0 ? '' : v-1; changed(); }
+});
+document.addEventListener('change', e=>{
+  const t = e.target; if (t.closest('.modal')) return;
+  const row = t.closest('.row'), it = row && state.items.find(x=>x.id===row.dataset.id);
+  if (t.dataset.act==='ship' && it){ it.ship = t.checked; changed(); }
+  else if (t.dataset.act==='arr' && it){ const v=t.value.trim(); it.arr = v==='' ? '' : Math.max(0,parseInt(v,10)||0); changed(); }
+  else if (t.id==='fStatus'){ ui.status=t.value; render(); }
+  else if (t.id==='fSort'){ ui.sort=t.value; render(); }
+});
+function onSearch(e){
+  if (e.target.id==='q'){ ui.q = e.target.value; const pos=e.target.selectionStart; render(); const q=$('#q'); q.focus(); try{ q.setSelectionRange(pos,pos);}catch(_){} }
+}
+document.addEventListener('input', e=>{ if(!e.isComposing) onSearch(e); });
+document.addEventListener('compositionend', onSearch);
+document.addEventListener('keydown', e=>{
+  if (e.key==='Escape') closeModal();
+  if ((e.ctrlKey||e.metaKey) && e.key==='s'){ e.preventDefault(); if(mode!=='pending') save(); }
+  if (e.key==='Enter' && e.target.dataset && e.target.dataset.act==='arr') e.target.blur();
+});
+window.addEventListener('beforeunload', e=>{ if (dirty && mode==='artifact'){ e.preventDefault(); e.returnValue=''; } });
+
+/* ---------- boot ---------- */
+render();
+(async ()=>{
+  const d = await draftGet();
+  if (d && d.state && Array.isArray(d.state.items) && d.base >= EMBED.savedAt){ state = d.state; base = d.base; dirty = !!d.dirty; }
+  if (window.claude && typeof window.claude.use === 'function'){
+    try { [artifact, downloads] = await Promise.all([window.claude.use('artifact'), window.claude.use('downloads')]); } catch(e){}
+  }
+  mode = artifact ? 'artifact' : 'file';
+  render();
+})();
+})();
+</script>
+</body>
+</html>
