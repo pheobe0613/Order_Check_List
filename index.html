@@ -156,27 +156,28 @@ textarea.mono{width:100%;min-height:110px;font-family:ui-monospace,Menlo,monospa
   .fab{display:grid;place-items:center;position:fixed;right:18px;bottom:20px;width:56px;height:56px;border-radius:50%;background:var(--accent);color:#fff;border:0;font-size:28px;box-shadow:0 8px 20px rgba(196,71,43,.4);z-index:40}
   .hide-m{display:none}
 }
+.shipmark{display:inline-grid;place-items:center;width:26px;height:26px;border-radius:7px;background:var(--ship);color:#fff;font-size:15px;font-weight:700}
+.shipno{color:#c9c1b6}
+.c-arr b{font-size:18px;font-variant-numeric:tabular-nums}
+.c-arr .none{color:#c9c1b6;font-size:18px}
+.thumb.noimg{cursor:default}
+.updated{font-size:13px;color:var(--muted)}
+@media (max-width:760px){ .ro .row{grid-template-areas:"thumb ip ip" "thumb name name" "pre arr ship"} .ro .row > div:last-child{display:none} .ro .c-ship .lbl{display:inline;margin-right:4px} }
 </style>
 </head>
 <body>
 <div id="root"></div>
-<script type="application/json" id="data">{"v":1,"savedAt":1794549841969,"cats":["一番賞","陀螺","盲盒","毛絨吊飾","扭蛋","盒玩","卡牌"],"items":[{"id":"a1","cat":"一番賞","ip":"海賊王","img":"","name":"明年的海賊一番賞","pre":3,"arr":"","ship":false,"note":""},{"id":"a2","cat":"一番賞","ip":"東京喰種","img":"","name":"好像也是明年的","pre":3,"arr":"","ship":false,"note":""},{"id":"a3","cat":"一番賞","ip":"三麗鷗","img":"","name":"","pre":1,"arr":"","ship":true,"note":""}]}</script>
+<script type="application/json" id="data">{"v":1,"savedAt":1794553001346,"cats":["一番賞","陀螺","盲盒","毛絨吊飾","扭蛋","盒玩","卡牌"],"items":[{"id":"a1","cat":"一番賞","ip":"海賊王","img":"","name":"明年的海賊一番賞","pre":3,"arr":"","ship":false,"note":""},{"id":"a2","cat":"一番賞","ip":"東京喰種","img":"","name":"好像也是明年的","pre":3,"arr":"","ship":false,"note":""},{"id":"a3","cat":"一番賞","ip":"三麗鷗","img":"","name":"","pre":1,"arr":"","ship":true,"note":""}]}</script>
 <script id="app">
 (function(){
 "use strict";
 const HEAD_HTML = document.head.innerHTML;
 const APP_SRC = document.getElementById('app').textContent;
-const EMBED = JSON.parse(document.getElementById('data').textContent);
-let state = JSON.parse(JSON.stringify(EMBED));
-let dirty = false;
-let base = EMBED.savedAt;      // savedAt the local draft is based on
-let artifact = null;            // claude.ai self-publish capability
-let downloads = null;           // claude.ai file-save capability
-let mode = 'pending';           // 'artifact' | 'file' | 'pending'
+let state = JSON.parse(document.getElementById('data').textContent);
+let artifact = null, downloads = null;   // only available inside Claude
+let editable = false, dirty = false;
 const ui = { tab:'__all', q:'', ip:'', status:'', sort:'order' };
-const STORE_KEY = 'order-mgr:' + location.pathname;
 
-/* ---------- utils ---------- */
 const $ = (s, el=document) => el.querySelector(s);
 const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const uid = () => Date.now().toString(36) + Math.random().toString(36).slice(2,7);
@@ -186,65 +187,36 @@ function ipColor(ip){ let h=0; for (const ch of String(ip)) h = (h*31 + ch.codeP
 function pill(ip){ if(!ip) return '<span class="pill" style="background:var(--soft);color:var(--muted)">未分類</span>'; const [b,f]=ipColor(ip); return `<span class="pill" style="background:${b};color:${f}">${esc(ip)}</span>`; }
 function statusOf(it){
   const a = num(it.arr), p = Number(it.pre)||0;
-  if (a != null && a > 0 && a > p && p > 0) return ['s-over','多到 '+(a-p)];
+  if (a != null && a > p && p > 0) return ['s-over','多到 '+(a-p)];
   if (a != null && p > 0 && a >= p) return ['s-done','已到齊'];
   if (a != null && a > 0) return ['s-part','缺 '+(p-a)];
   if (it.ship) return ['s-ship','已入港'];
   return ['s-wait','等待中'];
 }
-function statusKey(it){ return statusOf(it)[0]; }
+const statusKey = it => statusOf(it)[0];
 let toastT;
 function toast(msg){ let t=$('.toast'); if(!t){ t=document.createElement('div'); t.className='toast'; document.body.appendChild(t);} t.textContent=msg; clearTimeout(toastT); toastT=setTimeout(()=>t.remove(),2600); }
+function changed(){ dirty = true; render(); }
 
-/* ---------- local draft (IndexedDB) ---------- */
-function idb(){ return new Promise((res,rej)=>{ try{ const r=indexedDB.open('order-mgr',1); r.onupgradeneeded=()=>r.result.createObjectStore('kv'); r.onsuccess=()=>res(r.result); r.onerror=()=>rej(r.error); }catch(e){ rej(e); } }); }
-async function draftGet(){ try{ const db=await idb(); return await new Promise((res,rej)=>{ const q=db.transaction('kv').objectStore('kv').get(STORE_KEY); q.onsuccess=()=>res(q.result); q.onerror=()=>rej(q.error); }); }catch(e){ return null; } }
-async function draftSet(v){ try{ const db=await idb(); await new Promise((res,rej)=>{ const tx=db.transaction('kv','readwrite'); tx.objectStore('kv').put(v,STORE_KEY); tx.oncomplete=res; tx.onerror=()=>rej(tx.error); }); }catch(e){} }
-let draftTimer;
-function changed(){ dirty = true; clearTimeout(draftTimer); draftTimer = setTimeout(()=>draftSet({base, dirty:true, state}), 300); render(); }
-
-/* ---------- export ---------- */
-function buildHTML(st=state){
+/* ---------- save / export ---------- */
+function buildHTML(st){
   const json = JSON.stringify(st).replace(/</g,'\\u003c');
   return '<!DOCTYPE html>\n<html lang="zh-Hant">\n<head>' + HEAD_HTML + '</head>\n<body>\n<div id="root"></div>\n<script type="application/json" id="data">' + json + '<\/script>\n<script id="app">' + APP_SRC + '<\/script>\n</body>\n</html>\n';
 }
 async function save(){
-  if (mode === 'artifact'){
-    const btn = $('#saveBtn'); if (btn){ btn.disabled = true; btn.textContent = '儲存中…'; }
-    state.savedAt = Date.now();
-    await draftSet({base:state.savedAt, dirty:false, state});
-    try { await artifact.publish(buildHTML()); dirty=false; toast('已儲存'); }
-    catch(e){
-      const code = (e && (e.code || e.name || e.message)) || '';
-      await draftSet({base, dirty:true, state});
-      if (/not_writer|not_granted/.test(code)) toast('你只有檢視權限，無法儲存');
-      else if (/conflict/.test(code)) toast('其他地方剛更新過，頁面將重新載入');
-      else toast('儲存失敗：' + code);
-      render();
-    }
-  } else {
-    state.savedAt = Date.now();
-    const blob = new Blob([buildHTML()], {type:'text/html'});
-    const a = document.createElement('a'); a.href = URL.createObjectURL(blob);
-    a.download = 'index.html';
-    document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href), 4000);
-    base = state.savedAt;
-    await draftSet({base, dirty:false, state});
-    dirty = false; render(); toast('已下載含最新資料的 HTML');
+  const btn = $('#saveBtn'); if (btn){ btn.disabled = true; btn.textContent = '儲存中…'; }
+  try { await artifact.publish(buildHTML({...state, savedAt: Date.now()})); dirty = false; toast('已儲存'); }
+  catch(e){
+    const c = (e && (e.code || e.name || e.message)) || '';
+    if (/not_writer|not_granted/.test(c)) toast('你只有檢視權限，無法儲存');
+    else if (/conflict/.test(c)) toast('其他地方剛更新過，頁面將重新載入');
+    else toast('儲存失敗：' + c);
+    render();
   }
 }
-
 async function exportHTML(){
-  const html = buildHTML({...state, savedAt: Date.now()});
-  const filename = 'index.html';
-  if (downloads){
-    try { await downloads.save({filename, data: html}); toast('已匯出 HTML'); }
-    catch(e){ const c=(e&&(e.code||e.message))||''; if(!/cancel|declin|abort/i.test(c)) toast('匯出失敗：'+c); }
-    return;
-  }
-  const a = document.createElement('a'); a.href = URL.createObjectURL(new Blob([html],{type:'text/html'}));
-  a.download = filename; document.body.appendChild(a); a.click(); a.remove(); setTimeout(()=>URL.revokeObjectURL(a.href), 4000);
-  toast('已匯出 HTML');
+  try { await downloads.save({filename:'index.html', data: buildHTML({...state, savedAt: Date.now()})}); toast('已匯出 index.html'); }
+  catch(e){ const c=(e&&(e.code||e.message))||''; if(!/cancel|declin|abort/i.test(c)) toast('匯出失敗：'+c); }
 }
 
 /* ---------- image ---------- */
@@ -271,7 +243,9 @@ function visibleItems(){
   if (ui.sort === 'new') list = list.slice().reverse();
   return list;
 }
+function fmtDate(t){ if(!t) return ''; const d=new Date(t); return `${d.getFullYear()}/${d.getMonth()+1}/${d.getDate()}`; }
 function render(){
+  document.body.classList.toggle('ro', !editable);
   const tabItems = state.items.filter(it => ui.tab==='__all' || it.cat===ui.tab);
   const ips = [...new Set(tabItems.map(it=>it.ip).filter(Boolean))];
   if (ui.ip && !ips.includes(ui.ip)) ui.ip = '';
@@ -281,25 +255,26 @@ function render(){
   const shipped = list.filter(x=>x.ship).length;
   const lacking = sum(list, x=> Math.max(0,(Number(x.pre)||0)-(num(x.arr)||0)));
   const count = c => state.items.filter(it=>it.cat===c).length;
-  const saveLabel = mode==='artifact' ? '儲存' : mode==='file' ? '下載 HTML' : '…';
+  const right = editable ? `
+      <span class="savestate ${dirty?'dirty':''}"><span class="dot"></span>${dirty?'尚未儲存':'已儲存'}</span>
+      <span class="spacer"></span>
+      <button class="btn icon" data-act="settings" title="分類設定">⚙︎<span class="hide-m">分類</span></button>
+      ${downloads ? '<button class="btn icon" data-act="export" title="匯出唯讀 HTML">⇩<span class="hide-m">匯出 HTML</span></button>' : ''}
+      <button class="btn ${dirty?'primary':''}" id="saveBtn" data-act="save">儲存</button>
+      <button class="btn primary hide-m" data-act="add">＋ 新增品項</button>`
+    : `<span class="spacer"></span>`;
 
   $('#root').innerHTML = `
   <div class="wrap">
     <header class="top">
       <h1><span class="stamp">訂</span>訂貨管理</h1>
-      <span class="savestate ${dirty?'dirty':''}"><span class="dot"></span>${dirty ? (mode==='file'?'已存在這台裝置，尚未匯出':'尚未儲存') : '已儲存'}</span>
-      <span class="spacer"></span>
-      <button class="btn icon" data-act="settings" title="設定">⚙︎<span class="hide-m">設定</span></button>
-      ${mode==='artifact' && downloads ? '<button class="btn" data-act="export" title="匯出含最新資料的 HTML">⇩<span class="hide-m">匯出 HTML</span></button>' : ''}
-      <button class="btn ${mode==='artifact'&&dirty?'primary':''}" id="saveBtn" data-act="save" ${mode==='pending'?'disabled':''}>${saveLabel}</button>
-      <button class="btn primary hide-m" data-act="add">＋ 新增商品</button>
+      ${!editable && state.savedAt?`<span class="updated">更新於 ${fmtDate(state.savedAt)}</span>`:''}
+      ${right}
     </header>
-
     <nav class="tabs">
       <button class="tab ${ui.tab==='__all'?'on':''}" data-tab="__all">全部<span class="n">${state.items.length}</span></button>
       ${state.cats.map(c=>`<button class="tab ${ui.tab===c?'on':''}" data-tab="${esc(c)}">${esc(c)}<span class="n">${count(c)}</span></button>`).join('')}
     </nav>
-
     <section class="stats">
       <div class="stat"><div class="k">品項</div><div class="v">${list.length}</div></div>
       <div class="stat"><div class="k">預購數量</div><div class="v">${pre}</div></div>
@@ -307,29 +282,35 @@ function render(){
       <div class="stat hl"><div class="k">尚缺</div><div class="v">${lacking}</div></div>
       <div class="stat"><div class="k">大船入港</div><div class="v">${shipped}<span style="font-size:13px;color:var(--muted);font-weight:400"> / ${list.length}</span></div></div>
     </section>
-
     <div class="filters">
       <input class="search" id="q" placeholder="搜尋 IP、名字、備註…" value="${esc(ui.q)}">
       <select class="sel" id="fStatus">
         ${[['','全部狀態'],['pending','未到齊'],['s-wait','等待中'],['s-ship','已入港'],['s-part','部分到貨'],['s-done','已到齊'],['s-over','多到']].map(([v,t])=>`<option value="${v}" ${ui.status===v?'selected':''}>${t}</option>`).join('')}
       </select>
       <select class="sel" id="fSort">
-        ${[['order','新增順序'],['new','最新在前'],['ip','依 IP'],['status','依狀態']].map(([v,t])=>`<option value="${v}" ${ui.sort===v?'selected':''}>${t}</option>`).join('')}
+        ${[['order','預設順序'],['new','最新在前'],['ip','依 IP'],['status','依狀態']].map(([v,t])=>`<option value="${v}" ${ui.sort===v?'selected':''}>${t}</option>`).join('')}
       </select>
     </div>
     ${ips.length>1 ? `<div class="ipchips"><button class="chip ${!ui.ip?'on':''}" data-ip="">全部 IP</button>${ips.map(ip=>{const [b,f]=ipColor(ip);return `<button class="chip ${ui.ip===ip?'on':''}" data-ip="${esc(ip)}" style="background:${b};color:${f};border-color:${b}">${esc(ip)}</button>`}).join('')}</div>` : ''}
-
     <div class="list">
       ${list.length ? `<div class="row head"><div>圖片</div><div>IP</div><div>名字</div><div>預購</div><div>實際到貨</div><div>大船入港</div><div></div></div>` + list.map(rowHTML).join('')
-        : `<div class="empty-state">${state.items.length ? '沒有符合條件的商品' : '還沒有商品，按「新增商品」開始'}</div>`}
+        : `<div class="empty-state">${state.items.length ? '沒有符合條件的商品' : (editable?'還沒有商品，按「新增品項」開始':'目前沒有商品')}</div>`}
     </div>
   </div>
-  <button class="fab" data-act="add" aria-label="新增商品">＋</button>`;
+  ${editable ? '<button class="fab" data-act="add" aria-label="新增品項">＋</button>' : ''}`;
 }
 function rowHTML(it){
-  const [sc, st] = statusOf(it);
+  const [sc, st] = statusOf(it); const a = num(it.arr);
+  const thumb = it.img ? `<button class="thumb" data-act="zoom"><img src="${it.img}" alt="" loading="lazy"></button>`
+    : editable ? `<button class="thumb" data-act="edit">＋ 圖片</button>` : '<div class="thumb noimg">無圖片</div>';
+  const arrCell = editable
+    ? `<div class="stepper"><button data-act="dec" aria-label="減少">−</button><input data-act="arr" inputmode="numeric" placeholder="—" value="${a==null?'':a}"><button data-act="inc" aria-label="增加">＋</button></div>`
+    : (a==null?'<span class="none">—</span>':`<b>${a}</b>`);
+  const shipCell = editable
+    ? `<label class="chk"><input type="checkbox" data-act="ship" ${it.ship?'checked':''}><span>大船入港</span></label>`
+    : `<span class="lbl">大船入港</span>${it.ship?'<span class="shipmark" title="已入港">✓</span>':'<span class="shipno">—</span>'}`;
   return `<div class="row" data-id="${esc(it.id)}">
-    <button class="thumb" data-act="${it.img?'zoom':'edit'}">${it.img?`<img src="${it.img}" alt="">`:'＋ 圖片'}</button>
+    ${thumb}
     <div class="c-ip">${pill(it.ip)}</div>
     <div class="c-name">
       <div class="name ${it.name?'':'empty'}">${it.name?esc(it.name):'（未命名）'}</div>
@@ -337,37 +318,36 @@ function rowHTML(it){
       <div class="meta"><span class="status ${sc}">${st}</span>${ui.tab==='__all'?`<span class="cattag">${esc(it.cat)}</span>`:''}</div>
     </div>
     <div class="c-pre"><span class="lbl">預購</span><b>${Number(it.pre)||0}</b></div>
-    <div class="c-arr"><span class="lbl">實到</span><div class="stepper"><button data-act="dec" aria-label="減少">−</button><input data-act="arr" inputmode="numeric" placeholder="—" value="${it.arr===''||it.arr==null?'':esc(it.arr)}"><button data-act="inc" aria-label="增加">＋</button></div></div>
-    <div class="c-ship"><label class="chk"><input type="checkbox" data-act="ship" ${it.ship?'checked':''}><span>大船入港</span></label></div>
-    <button class="c-edit" data-act="edit" title="編輯">✎</button>
+    <div class="c-arr"><span class="lbl">實到</span>${arrCell}</div>
+    <div class="c-ship">${shipCell}</div>
+    ${editable ? '<button class="c-edit" data-act="edit" title="編輯">✎</button>' : '<div></div>'}
   </div>`;
 }
 
-/* ---------- modals ---------- */
-function openModal(html, wide){
+/* ---------- modals (edit mode) ---------- */
+function openModal(html){
   closeModal();
-  const m = document.createElement('div'); m.className='mask'; m.id='mask';
-  m.innerHTML = html;
+  const m = document.createElement('div'); m.className='mask'; m.id='mask'; m.innerHTML = html;
   m.addEventListener('mousedown', e=>{ if(e.target===m) closeModal(); });
-  document.body.appendChild(m);
-  return m;
+  document.body.appendChild(m); return m;
 }
 function closeModal(){ const m=$('#mask'); if(m) m.remove(); }
-function ask(msg, okText='確定', danger=true){
+function ask(msg, okText='確定'){
   return new Promise(res=>{
-    const m = openModal(`<div class="modal" style="max-width:380px"><div class="body" style="padding-top:22px">${esc(msg)}</div><div class="foot"><span class="spacer"></span><button class="btn" data-r="0">取消</button><button class="btn ${danger?'danger':'primary'}" data-r="1">${esc(okText)}</button></div></div>`);
+    const m = openModal(`<div class="modal" style="max-width:380px"><div class="body" style="padding-top:22px">${esc(msg)}</div><div class="foot"><span class="spacer"></span><button class="btn" data-r="0">取消</button><button class="btn danger" data-r="1">${esc(okText)}</button></div></div>`);
     m.addEventListener('click', e=>{ const b=e.target.closest('[data-r]'); if(b){ closeModal(); res(b.dataset.r==='1'); } });
   });
 }
+const DROP_EMPTY = '<div>📷<br>點選上傳圖片<br><span class="hint">也可以拖曳或 Ctrl+V 貼上</span></div>';
 function editItem(id){
   const it = id ? state.items.find(x=>x.id===id) : null;
   const d = it ? {...it} : {id:uid(), cat: ui.tab==='__all' ? state.cats[0] : ui.tab, ip: ui.ip||'', img:'', name:'', pre:1, arr:'', ship:false, note:''};
   const allIps = [...new Set(state.items.map(x=>x.ip).filter(Boolean))];
   const m = openModal(`<form class="modal" id="f">
-    <h2>${it?'編輯商品':'新增商品'}</h2>
+    <h2>${it?'編輯品項':'新增品項'}</h2>
     <div class="body">
       <div class="field"><label>圖片（點選、拖曳或直接貼上）</label>
-        <div class="drop" id="drop">${d.img?`<img src="${d.img}"><button type="button" class="x" id="rmImg" aria-label="移除">✕</button>`:'<div>📷<br>點選上傳圖片<br><span class="hint">也可以拖曳或 Ctrl+V 貼上</span></div>'}</div>
+        <div class="drop" id="drop">${d.img?`<img src="${d.img}"><button type="button" class="x" id="rmImg" aria-label="移除">✕</button>`:DROP_EMPTY}</div>
         <input type="file" id="file" accept="image/*" hidden>
       </div>
       <div class="grid2">
@@ -386,19 +366,19 @@ function editItem(id){
       ${it?'<button type="button" class="btn danger" id="del">刪除</button>':''}
       <span class="spacer"></span>
       <button type="button" class="btn" id="cancel">取消</button>
-      <button type="submit" class="btn primary">${it?'儲存變更':'新增'}</button>
+      <button type="submit" class="btn primary">${it?'完成':'新增'}</button>
     </div>
   </form>`);
   const drop = $('#drop',m), file = $('#file',m);
   const setImg = async f => { if(!f || !/^image\//.test(f.type)) return; try{ d.img = await fileToDataURL(f); drop.innerHTML = `<img src="${d.img}"><button type="button" class="x" id="rmImg" aria-label="移除">✕</button>`; }catch(e){ toast(e.message); } };
-  drop.addEventListener('click', e=>{ if(e.target.closest('#rmImg')){ e.stopPropagation(); d.img=''; drop.innerHTML='<div>📷<br>點選上傳圖片<br><span class="hint">也可以拖曳或 Ctrl+V 貼上</span></div>'; return; } file.click(); });
+  drop.addEventListener('click', e=>{ if(e.target.closest('#rmImg')){ e.stopPropagation(); d.img=''; drop.innerHTML=DROP_EMPTY; return; } file.click(); });
   file.addEventListener('change', ()=> setImg(file.files[0]));
   drop.addEventListener('dragover', e=>{ e.preventDefault(); drop.classList.add('over'); });
   drop.addEventListener('dragleave', ()=> drop.classList.remove('over'));
   drop.addEventListener('drop', e=>{ e.preventDefault(); drop.classList.remove('over'); setImg(e.dataTransfer.files[0]); });
   m.addEventListener('paste', e=>{ const f=[...(e.clipboardData?.files||[])].find(f=>/^image\//.test(f.type)); if(f){ e.preventDefault(); setImg(f); } });
   $('#cancel',m).onclick = closeModal;
-  if (it) $('#del',m).onclick = async ()=>{ if(await ask('確定刪除這個商品？','刪除')){ state.items = state.items.filter(x=>x.id!==it.id); changed(); } else editItem(it.id); };
+  if (it) $('#del',m).onclick = async ()=>{ if(await ask('確定刪除這個品項？','刪除')){ state.items = state.items.filter(x=>x.id!==it.id); changed(); } else editItem(it.id); };
   $('#f',m).addEventListener('submit', e=>{
     e.preventDefault();
     d.cat = $('#fcat',m).value; d.ip = $('#fip',m).value.trim(); d.name = $('#fname',m).value.trim();
@@ -406,111 +386,89 @@ function editItem(id){
     const a = $('#farr',m).value.trim(); d.arr = a==='' ? '' : Math.max(0, parseInt(a,10)||0);
     d.ship = $('#fship',m).checked; d.note = $('#fnote',m).value.trim();
     if (it) Object.assign(it, d); else state.items.push(d);
-    closeModal(); changed(); toast(it?'已更新':'已新增');
+    closeModal(); changed(); toast(it?'已更新，記得按儲存':'已新增，記得按儲存');
   });
   if(!it) $('#fip',m).focus();
 }
 function settings(){
   const m = openModal(`<div class="modal">
-    <h2>設定</h2>
-    <div class="body">
-      <div class="sec">分類分頁</div>
-      <div id="cats"></div>
-      <div class="catrow"><input id="newcat" placeholder="新增分類名稱"><button class="btn" id="addcat">新增</button></div>
-      <hr class="sep">
-      <div class="sec">資料備份</div>
-      <p class="hint" style="margin-top:0">複製下面的 JSON 存起來就是完整備份（含圖片）。要還原時貼回來按「匯入」。</p>
-      <textarea class="mono" id="json"></textarea>
-      <div style="display:flex;gap:8px;margin-top:8px;flex-wrap:wrap">
-        <button class="btn" id="copy">複製備份</button>
-        <button class="btn" id="imp">匯入（取代目前資料）</button>
-        <label class="btn">從檔案匯入<input type="file" id="impfile" accept=".json,application/json" hidden></label>
-      </div>
-    </div>
+    <h2>分類設定</h2>
+    <div class="body"><div id="cats"></div>
+      <div class="catrow"><input id="newcat" placeholder="新增分類名稱"><button class="btn" id="addcat">新增</button></div></div>
     <div class="foot"><span class="spacer"></span><button class="btn primary" id="close">完成</button></div>
   </div>`);
-  const drawCats = ()=>{
+  const draw = ()=>{
     $('#cats',m).innerHTML = state.cats.map((c,i)=>`<div class="catrow" data-i="${i}">
-      <button class="btn icon" data-mv="-1" ${i===0?'disabled':''} title="上移">↑</button>
+      <button class="btn icon" data-mv ${i===0?'disabled':''} title="上移">↑</button>
       <input value="${esc(c)}" data-rn>
       <span class="cnt">${state.items.filter(x=>x.cat===c).length} 項</span>
       <button class="btn icon danger" data-rm title="刪除">✕</button></div>`).join('');
   };
-  drawCats();
-  $('#json',m).value = JSON.stringify(state);
+  draw();
   $('#cats',m).addEventListener('change', e=>{
     const inp = e.target.closest('[data-rn]'); if(!inp) return;
     const i = +inp.closest('.catrow').dataset.i, old = state.cats[i], nv = inp.value.trim();
     if (!nv || (nv!==old && state.cats.includes(nv))){ toast('名稱不可空白或重複'); inp.value = old; return; }
     state.cats[i] = nv; state.items.forEach(x=>{ if(x.cat===old) x.cat=nv; }); if(ui.tab===old) ui.tab=nv; changed();
   });
-  $('#cats',m).addEventListener('click', async e=>{
+  $('#cats',m).addEventListener('click', e=>{
     const row = e.target.closest('.catrow'); if(!row) return; const i = +row.dataset.i;
-    if (e.target.closest('[data-mv]')){ const [c]=state.cats.splice(i,1); state.cats.splice(i-1,0,c); changed(); drawCats(); }
+    if (e.target.closest('[data-mv]')){ const [c]=state.cats.splice(i,1); state.cats.splice(i-1,0,c); changed(); draw(); }
     if (e.target.closest('[data-rm]')){
       const c = state.cats[i], n = state.items.filter(x=>x.cat===c).length;
-      if (n){ toast(`「${c}」裡還有 ${n} 項商品，請先移到其他分類`); return; }
-      state.cats.splice(i,1); if(ui.tab===c) ui.tab='__all'; changed(); drawCats();
+      if (n){ toast(`「${c}」裡還有 ${n} 項，請先移到其他分類`); return; }
+      state.cats.splice(i,1); if(ui.tab===c) ui.tab='__all'; changed(); draw();
     }
   });
-  $('#addcat',m).onclick = ()=>{ const v=$('#newcat',m).value.trim(); if(!v||state.cats.includes(v)) return toast('名稱不可空白或重複'); state.cats.push(v); $('#newcat',m).value=''; changed(); drawCats(); };
-  $('#copy',m).onclick = async ()=>{ try{ await navigator.clipboard.writeText(JSON.stringify(state)); toast('已複製'); }catch(e){ $('#json',m).select(); toast('請手動複製選取的文字'); } };
-  const doImport = async txt => {
-    try{ const s = JSON.parse(txt); if(!Array.isArray(s.items)||!Array.isArray(s.cats)) throw 0;
-      if(!(await ask(`匯入 ${s.items.length} 項商品並取代目前資料？`,'匯入'))) return settings();
-      state = {v:1, savedAt:state.savedAt, cats:s.cats, items:s.items}; ui.tab='__all'; changed(); toast('已匯入');
-    }catch(e){ toast('格式不正確，無法匯入'); }
-  };
-  $('#imp',m).onclick = ()=> doImport($('#json',m).value);
-  $('#impfile',m).onchange = async e=>{ const f=e.target.files[0]; if(f) doImport(await f.text()); };
+  $('#addcat',m).onclick = ()=>{ const v=$('#newcat',m).value.trim(); if(!v||state.cats.includes(v)) return toast('名稱不可空白或重複'); state.cats.push(v); $('#newcat',m).value=''; changed(); draw(); };
   $('#close',m).onclick = closeModal;
 }
 
 /* ---------- events ---------- */
 document.addEventListener('click', e=>{
-  const t = e.target;
+  const t = e.target; if (t.closest('.modal')) return;
   const tab = t.closest('[data-tab]'); if (tab){ ui.tab = tab.dataset.tab; ui.ip=''; render(); return; }
-  const chip = t.closest('[data-ip]'); if (chip && !t.closest('.modal')){ ui.ip = chip.dataset.ip; render(); return; }
-  const a = t.closest('[data-act]'); if (!a || t.closest('.modal')) return;
+  const chip = t.closest('[data-ip]'); if (chip){ ui.ip = chip.dataset.ip; render(); return; }
+  const a = t.closest('[data-act]'); if (!a) return;
   const act = a.dataset.act, row = a.closest('.row'), it = row && state.items.find(x=>x.id===row.dataset.id);
+  if (act==='zoom' && it){ const m=openModal(`<img class="zoom" src="${it.img}" alt="">`); m.addEventListener('click',closeModal); return; }
+  if (!editable) return;
   if (act==='add') editItem();
   else if (act==='save') save();
   else if (act==='export') exportHTML();
   else if (act==='settings') settings();
   else if (act==='edit' && it) editItem(it.id);
-  else if (act==='zoom' && it){ const m=openModal(`<img class="zoom" src="${it.img}" alt="">`); m.addEventListener('click',closeModal); }
   else if (act==='inc' && it){ it.arr = (num(it.arr)||0)+1; changed(); }
   else if (act==='dec' && it){ const v=num(it.arr); it.arr = v==null||v<=0 ? '' : v-1; changed(); }
 });
 document.addEventListener('change', e=>{
   const t = e.target; if (t.closest('.modal')) return;
+  if (t.id==='fStatus'){ ui.status=t.value; render(); return; }
+  if (t.id==='fSort'){ ui.sort=t.value; render(); return; }
+  if (!editable) return;
   const row = t.closest('.row'), it = row && state.items.find(x=>x.id===row.dataset.id);
   if (t.dataset.act==='ship' && it){ it.ship = t.checked; changed(); }
   else if (t.dataset.act==='arr' && it){ const v=t.value.trim(); it.arr = v==='' ? '' : Math.max(0,parseInt(v,10)||0); changed(); }
-  else if (t.id==='fStatus'){ ui.status=t.value; render(); }
-  else if (t.id==='fSort'){ ui.sort=t.value; render(); }
 });
 function onSearch(e){
-  if (e.target.id==='q'){ ui.q = e.target.value; const pos=e.target.selectionStart; render(); const q=$('#q'); q.focus(); try{ q.setSelectionRange(pos,pos);}catch(_){} }
+  if (e.target.id!=='q') return;
+  ui.q = e.target.value; const pos=e.target.selectionStart; render(); const q=$('#q'); q.focus(); try{ q.setSelectionRange(pos,pos);}catch(_){}
 }
 document.addEventListener('input', e=>{ if(!e.isComposing) onSearch(e); });
 document.addEventListener('compositionend', onSearch);
 document.addEventListener('keydown', e=>{
   if (e.key==='Escape') closeModal();
-  if ((e.ctrlKey||e.metaKey) && e.key==='s'){ e.preventDefault(); if(mode!=='pending') save(); }
+  if (editable && (e.ctrlKey||e.metaKey) && e.key==='s'){ e.preventDefault(); save(); }
   if (e.key==='Enter' && e.target.dataset && e.target.dataset.act==='arr') e.target.blur();
 });
-window.addEventListener('beforeunload', e=>{ if (dirty && mode==='artifact'){ e.preventDefault(); e.returnValue=''; } });
+window.addEventListener('beforeunload', e=>{ if (dirty){ e.preventDefault(); e.returnValue=''; } });
 
-/* ---------- boot ---------- */
+/* ---------- boot: editable only inside Claude ---------- */
 render();
 (async ()=>{
-  const d = await draftGet();
-  if (d && d.state && Array.isArray(d.state.items) && d.base >= EMBED.savedAt){ state = d.state; base = d.base; dirty = !!d.dirty; }
-  if (window.claude && typeof window.claude.use === 'function'){
-    try { [artifact, downloads] = await Promise.all([window.claude.use('artifact'), window.claude.use('downloads')]); } catch(e){}
-  }
-  mode = artifact ? 'artifact' : 'file';
+  if (!(window.claude && typeof window.claude.use === 'function')) return;
+  try { [artifact, downloads] = await Promise.all([window.claude.use('artifact'), window.claude.use('downloads')]); } catch(e){}
+  editable = !!artifact;
   render();
 })();
 })();
